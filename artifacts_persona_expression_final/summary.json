@@ -1,0 +1,60 @@
+{
+  "study": "persona_expression",
+  "runs": 528,
+  "model_decisions": 63360,
+  "executed_posts": 65649,
+  "multi_action_outputs": 961,
+  "extra_posts": 2289,
+  "expanded_runs": 180,
+  "maximum_actions_in_one_decision": 66,
+  "event_replay_accuracy": 1.0,
+  "multi_call_guidance_coverage": 1.0,
+  "maximum_absolute_run_diversity_shift": 0.07817201751065406,
+  "mean_absolute_run_diversity_shift": 0.0015907739882813528,
+  "claims_with_target_verdict_change": [],
+  "interpretation": "The effective prompt explicitly permits multiple tool calls and the runtime executes every create_tweet call. However, the study README, world, and single_action policy describe one post per agent-step as the measurement unit. A one-decision/one-post projection keeps only the first call to quantify sensitivity to this configuration/measurement-unit mismatch; it is not privileged ground truth.",
+  "source_measurement_unit_audit": {
+    "interpretation": "The effective prompt intentionally permits multiple tool calls, and the runtime resolver executes all of them. The mismatch is therefore not model noncompliance: the study README and single_action policy define one post per agent-step as the measurement unit, while tool_calling.mode=multi expands one model decision into multiple post events.",
+    "checks": {
+      "readme_claims_one_post_per_agent_per_step": true,
+      "world_sets_30_agents": true,
+      "world_sets_4_steps": true,
+      "scenario_uses_multi_tool_calling": true,
+      "scenario_uses_single_action_turn_policy": true,
+      "scenario_comment_calls_one_post_per_agent_step_clean_unit": true,
+      "runtime_multi_prompt_says_calls_execute_in_sequence": true,
+      "runtime_resolver_invokes_every_normalized_call": true,
+      "runtime_single_action_policy_runs_one_agent_step": true
+    },
+    "files": [
+      {
+        "path": "references/socsim26_sharedtask/studies/persona_expression/README.md",
+        "sha256": "aee7a217ffd88787db77520481e5b646b4c824dbf4891577d279e0edc91cd2f4"
+      },
+      {
+        "path": "references/socsim26_sharedtask/studies/persona_expression/scenario/world/default.yaml",
+        "sha256": "0ecb8b6166b9423269c24d187b7e0cd088095ee8103225d121e7f435da1082e9"
+      },
+      {
+        "path": "references/socsim26_sharedtask/studies/persona_expression/scenario/sim.yaml",
+        "sha256": "ad426c187f1149951d26ab3b6996be53e060e45af2c8adcde1b9db5d90096974"
+      },
+      {
+        "path": "references/silisocs_0_2_0/extracted/silisocs/runtime/prompts/action_prompts.py",
+        "sha256": "d37b6e31c12172834fa2940c82c524fdb1c6c7d8d3e72f448fb7ac9ac03417f2"
+      },
+      {
+        "path": "references/silisocs_0_2_0/extracted/silisocs/environments/gm/components/resolve.py",
+        "sha256": "cc2236f2c2b6980d304c7e4a7446f64918d40c6b3f0d6be0e84764321553ae38"
+      },
+      {
+        "path": "references/silisocs_0_2_0/extracted/silisocs/simulation_engines/policies/turns.py",
+        "sha256": "aa411a8a44d060ee7cebeeac125a38a0cd5ffdf49cfa68609c6550155bfde4de"
+      },
+      {
+        "path": "references/silisocs_0_2_0/silisocs-0.2.0-py3-none-any.whl",
+        "sha256": "8ad76033a969edb6731bb14d9a64619ef7df64d234f96179ae05347d74e4f1f9"
+      }
+    ]
+  }
+}

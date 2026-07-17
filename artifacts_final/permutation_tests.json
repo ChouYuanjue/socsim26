@@ -1,0 +1,8 @@
+{
+  "test": "H2 stratum-level paired randomization sign-flip",
+  "observed_mean_effect": 1.5499999999999998,
+  "two_sided_pvalue": 0.016599170041497927,
+  "permutations": 20000,
+  "unit": "matched context-stratum mean",
+  "note": "This randomization test is supplementary; the paper's primary uncertainty remains conditional on five released seeds."
+}

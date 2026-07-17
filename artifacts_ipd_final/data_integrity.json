@@ -1,0 +1,12 @@
+{
+  "manifest_rows": 3465,
+  "parsed_runs": 3465,
+  "prompt_action_calls": 69300,
+  "expected_prompt_action_calls": 69300,
+  "released_parser_round_matches": 34650,
+  "expected_round_matches": 34650,
+  "errors": [],
+  "manifest_sha256": "d9d51bc54136583c05761853d69cea023b77614a2816b473c6626658a6cba335",
+  "tarball_sha256": "8a5590c95b8ace0f4d6552fa9885d0ac7dbbc918a485cb1667d91da779f69365",
+  "input_mode": "direct official tar-member read"
+}

@@ -1,0 +1,21 @@
+{
+  "source_path": "references/socsim26_sharedtask/task_components/game.py",
+  "sha256": "88eebe98a6c4b07ae0f2f160d892322ba848c6976537d652ec1cfe0329ed30d3",
+  "functions": {
+    "parse_number_choice": {
+      "start_line": 119,
+      "end_line": 124,
+      "source": "def parse_number_choice(text: str) -> int | None:\n    \"\"\"Extract an integer 11-20 from agent action text.\"\"\"\n    matches = re.findall(r\"\\b(1[1-9]|20)\\b\", str(text or \"\"))\n    if matches:\n        return int(matches[0])\n    return None"
+    },
+    "parse_pd_choice": {
+      "start_line": 127,
+      "end_line": 146,
+      "source": "def parse_pd_choice(\n    text: str,\n    cooperate_label: str = \"COOPERATE\",\n    defect_label: str = \"DEFECT\",\n) -> str | None:\n    \"\"\"Extract the (possibly relabelled) PD choice from agent action text.\n\n    Returns the canonical token \"COOPERATE\" or \"DEFECT\" regardless of the\n    labels shown to the agent. When both labels appear, the earliest\n    occurrence wins.\n    \"\"\"\n    upper = str(text or \"\").upper()\n    hits: list[tuple[int, str]] = []\n    for canonical, label in ((\"COOPERATE\", cooperate_label), (\"DEFECT\", defect_label)):\n        match = re.search(rf\"\\b{re.escape(label.upper())}\\b\", upper)\n        if match:\n            hits.append((match.start(), canonical))\n    if not hits:\n        return None\n    return min(hits)[1]"
+    }
+  },
+  "execution_mode": "exact AST definitions compiled with only the standard-library re dependency",
+  "released_parser_replays_every_action_event_round": true,
+  "ipd_action_calls": 69300,
+  "ipd_divergent_action_fields": 58,
+  "ipd_divergent_runs": 49
+}

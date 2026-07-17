@@ -1,0 +1,13 @@
+model,question,mean_spearman,minimum_spearman
+gemma-4-31b,q182_homosexuality,0.8999999999999998,0.8999999999999998
+gemma-4-31b,q188_euthanasia,0.9999999999999999,0.9999999999999999
+gemma-4-31b,q1_family_importance,,
+qwen3.5-27b-fp8,q182_homosexuality,0.8999999999999998,0.8999999999999998
+qwen3.5-27b-fp8,q188_euthanasia,0.8999999999999998,0.8999999999999998
+qwen3.5-27b-fp8,q1_family_importance,,
+qwen3.5-4b,q182_homosexuality,0.7828842790319047,0.6
+qwen3.5-4b,q188_euthanasia,,
+qwen3.5-4b,q1_family_importance,0.47692691415652,0.05735393346764044
+qwen3.5-9b,q182_homosexuality,0.9999999999999999,0.9999999999999999
+qwen3.5-9b,q188_euthanasia,0.6977486121839513,0.6454972243679028
+qwen3.5-9b,q1_family_importance,,

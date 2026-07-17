@@ -1,0 +1,261 @@
+study: iterated_pd
+title: Framing sensitivity in a ten-round two-player prisoner's dilemma
+question: >-
+  What moves the cooperation rate of simulated players in a finitely repeated
+  prisoner's dilemma — the manipulations that should matter (moral framing,
+  stakes, real-vs-fictional cover story), or representation choices (persona
+  format, prompt wording, choice labels, history rendering) whose relevance
+  is itself under test?
+track: shared
+
+anchors:
+  - id: trails_framing
+    kind: literature
+    source: >-
+      TRAILS (arXiv:2605.18890): semantically-equivalent persona formats moved
+      PD cooperation by ~1pp (DeepSeek) to ~76pp (GPT-5.2); moralized
+      instruction framing raised cooperation; memory representation had
+      minimal effect.
+    description: >-
+      Motivates crossing the representation choices with the signal
+      manipulations in this design.
+  - id: framing_the_game
+    kind: literature
+    source: >-
+      "Framing the Game" (arXiv:2503.04840): wrapping the identical game in an
+      explicitly imaginary vignette dropped GPT-4o cooperation from 0.98 to
+      0.37 relative to a real-world cover story.
+  - id: more_at_stake
+    kind: literature
+    source: >-
+      "More at Stake" (arXiv:2601.19082): scaling payoff magnitude with fixed
+      structure changes behaviour — attenuated stakes (lambda=0.1) increase
+      defection.
+  - id: gtbench_alignment
+    kind: literature
+    source: >-
+      GTBench (NeurIPS 2024, arXiv:2402.12348): RLHF-aligned models
+      over-cooperate in iterated PD relative to code-pretrained models;
+      cooperation level is a model property.
+
+hypotheses:
+  h1_instruction_framing:
+    statement: >-
+      Moralized framing of the game raises the cooperation rate and
+      risk-emphasizing framing lowers it, relative to the canonical neutral
+      instructions.
+    rationale: >-
+      TRAILS instruction-framing result: moralized framings raise cooperation;
+      risk framings prime self-protection.
+    signal_variables: [instruction_framing]
+  h2_payoff_stakes:
+    statement: >-
+      Attenuating the payoff magnitude (structure fixed) increases defection;
+      amplifying it does not reduce cooperation.
+    rationale: >-
+      "More at Stake": lambda=0.1 increases defection relative to lambda=1;
+      the game-theoretic structure is unchanged, so a structure-only reasoner
+      would be indifferent.
+    signal_variables: [payoff_scale]
+  h3_fictional_frame:
+    statement: >-
+      Wrapping the identical game in an explicitly imaginary story reduces
+      cooperation relative to a real-world business cover story.
+    rationale: >-
+      "Framing the Game": real-world to imaginary-world vignette dropped
+      GPT-4o cooperation 0.98 -> 0.37; fictional frames license selfish play.
+    signal_variables: [vignette_frame]
+  h4_model_dependence:
+    statement: >-
+      The overall cooperation level differs substantially across model
+      families and scales, while the direction of the instruction-framing
+      effect (h1) is preserved for every model.
+    rationale: >-
+      GTBench: cooperation level tracks alignment training; TRAILS: framing
+      effect sizes are strongly model-dependent (1-76pp) but directions are
+      more stable.
+    signal_variables: [model, instruction_framing]
+  h5_endgame_defection:
+    statement: >-
+      Cooperation declines in the final rounds (end-game defection), since the
+      round count is finite and the history shows progress toward it.
+    rationale: >-
+      Backward induction in finitely repeated PD predicts late-round
+      defection; humans show end-game effects without full unravelling.
+    signal_variables: []
+  h6_persona_stance:
+    statement: >-
+      Persona stance moves cooperation: a cooperative stance raises the
+      cooperation rate and a competitive (exploitative) stance lowers it
+      relative to the neutral baseline, while a reciprocal stance conditions
+      its move on the other player's most recent choice.
+    rationale: >-
+      TRAILS persona-stance manipulation: explicit cooperative vs strategic
+      dispositions move PD cooperation substantially; tit-for-tat is the
+      canonical conditional-cooperation strategy.
+    signal_variables: [persona_stance]
+
+variables:
+  instruction_framing:
+    role: signal
+    path: pd_framing_note
+    base: ''
+    values:
+      - value: ''
+        label: canonical
+      - value: >-
+          Note: many people regard choosing the option that benefits both
+          players as the honest and mutually respectful course of action, and
+          regard betraying the other player for short-term gain as morally
+          questionable.
+        label: moralized
+      - value: >-
+          Note: choosing the option that benefits both players exposes you to
+          exploitation if the other player does not reciprocate. Protecting
+          yourself against betrayal is often the prudent course.
+        label: risk
+  payoff_scale:
+    role: signal
+    path: pd_payoff_t
+    base: 5.0
+    values:
+      - value: 5.0
+        label: lambda-1
+      - value: 0.5
+        label: lambda-0.1
+        overrides:
+          pd_payoff_r: 0.3
+          pd_payoff_p: 0.1
+          pd_payoff_s: 0.0
+      - value: 50.0
+        label: lambda-10
+        overrides:
+          pd_payoff_r: 30.0
+          pd_payoff_p: 10.0
+          pd_payoff_s: 0.0
+  vignette_frame:
+    role: signal
+    kind: group
+    group: world
+    base: default
+    values:
+      - value: default
+        label: abstract
+      - value: business_partners
+        label: business
+      - value: fictional_story
+        label: fictional
+  model:
+    role: signal
+    kind: model
+    base: qwen3.5-27b-fp8
+    values: [qwen3.5-27b-fp8, qwen3.5-9b, qwen3.5-4b, gemma-4-31b]
+  persona_stance:
+    # Symmetric game-playing disposition (both players receive the same
+    # stance), injected into the persona context ahead of the observations.
+    # Cooperative and competitive strings are TRAILS (arXiv:2605.18890)
+    # block-1 personas verbatim; reciprocal is the canonical tit-for-tat
+    # archetype. Neutral baseline adds nothing.
+    role: signal
+    path: pd_persona_disposition
+    base: ''
+    values:
+      - value: ''
+        label: neutral
+      - value: >-
+          You are a cooperative participant focused on mutual benefit and
+          long-term stability. Use observed history to maintain trust when
+          possible, respond proportionally to harm, and favor mutually
+          beneficial outcomes.
+        label: cooperative
+      - value: >-
+          You are a strategic participant focused on maximizing your long-term
+          payoff. Study opponent behavior for exploitable patterns, and adjust
+          your strategy to gain advantage while staying competitive.
+        label: competitive
+      - value: >-
+          You start by cooperating and then mirror the other player's most
+          recent choice, rewarding cooperation and answering defection in kind.
+        label: reciprocal
+  persona_format:
+    role: design_variation
+    kind: group
+    group: agents
+    base: default
+    values:
+      - value: default
+        label: plain
+      - value: persona_descriptive
+        label: descriptive
+      - value: persona_tabular
+        label: tabular
+  prompt_wording:
+    role: design_variation
+    path: env.gm.components.action_prompt.params.action_prompt
+    base: "You are playing a repeated two-player choice game.\nRules and history are shown above.\nState your choice on a single line — exactly one of:\n  COOPERATE\n  DEFECT\nThink about the other player's likely strategy and choose the action that maximises your long-run payoff.\n"
+    values:
+      - value: "You are playing a repeated two-player choice game.\nRules and history are shown above.\nState your choice on a single line — exactly one of:\n  COOPERATE\n  DEFECT\nThink about the other player's likely strategy and choose the action that maximises your long-run payoff.\n"
+        label: default
+      - value: "You are taking part in a repeated two-person choice game.\nThe rules and the record of play so far appear above.\nAnswer with exactly one of the following, on a line by itself:\n  COOPERATE\n  DEFECT\nConsider how the other player is likely to act and pick whichever action serves your overall payoff best.\n"
+        label: paraphrase-a
+      - value: "This is a two-player game played over several rounds.\nAbove you can see the rules together with everything that has happened so far.\nRespond with a single line containing exactly one of:\n  COOPERATE\n  DEFECT\nWeigh up the other player's probable strategy, then take the action that gives you the best long-run result.\n"
+        label: paraphrase-b
+      - value: "You are playing a repeated two-player choice game.\nRules and history are shown above.\nState your choice on a single line — exactly one of:\n  DEFECT\n  COOPERATE\nThink about the other player's likely strategy and choose the action that maximises your long-run payoff.\n"
+        label: defect-first
+  choice_labels:
+    role: design_variation
+    path: pd_cooperate_label
+    base: COOPERATE
+    values:
+      - value: COOPERATE
+        label: cooperate-defect
+      - value: GREEN
+        label: green-blue
+        overrides:
+          pd_defect_label: BLUE
+          env.gm.components.action_prompt.params.action_prompt: "You are playing a repeated two-player choice game.\nRules and history are shown above.\nState your choice on a single line — exactly one of:\n  GREEN\n  BLUE\nThink about the other player's likely strategy and choose the action that maximises your long-run payoff.\n"
+      - value: ACTION_A
+        label: action-ab
+        overrides:
+          pd_defect_label: ACTION_B
+          env.gm.components.action_prompt.params.action_prompt: "You are playing a repeated two-player choice game.\nRules and history are shown above.\nState your choice on a single line — exactly one of:\n  ACTION_A\n  ACTION_B\nThink about the other player's likely strategy and choose the action that maximises your long-run payoff.\n"
+  history_format:
+    role: design_variation
+    path: pd_history_format
+    base: lines
+    values: [lines, table, summary_counts]
+
+sweep:
+  signal_grid: [instruction_framing, payoff_scale, vignette_frame, model, persona_stance]
+  variations:
+    # All representation variations are isolated at the neutral persona stance
+    # so they probe the variation alone, not a stance x variation interaction.
+    persona_format:
+      # Full primary-model grid, plus the framing axis across all models.
+      cross: subset
+      subset:
+        - {model: qwen3.5-27b-fp8, persona_stance: neutral}
+        - {payoff_scale: 5.0, vignette_frame: default, persona_stance: neutral}
+      seeds: 5
+    prompt_wording:
+      cross: subset
+      subset:
+        - {model: qwen3.5-27b-fp8, persona_stance: neutral}
+      seeds: 5
+    choice_labels:
+      cross: subset
+      subset:
+        - {model: qwen3.5-27b-fp8, persona_stance: neutral}
+      seeds: 5
+    history_format:
+      cross: subset
+      subset:
+        - {model: qwen3.5-27b-fp8, persona_stance: neutral}
+      seeds: 5
+  seeds: {start: 8001, count: 5}
+  operating_point: {}
+  world: default
+  timeout_seconds: 1800
+  estimates:
+    llm_calls_per_run: 20
+    minutes_per_run: null

@@ -1,0 +1,99 @@
+\documentclass[9pt,twocolumn]{extarticle}
+\usepackage[letterpaper,margin=0.53in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,microtype,array,enumitem}
+\usepackage[hidelinks]{hyperref}
+\setlength{\columnsep}{0.18in}
+\setlength{\parskip}{0.03em}
+\setlength{\parindent}{0.75em}
+\setlength{\textfloatsep}{3pt plus 1pt minus 1pt}
+\setlength{\floatsep}{3pt plus 1pt minus 1pt}
+\setlength{\intextsep}{3pt plus 1pt minus 1pt}
+\renewcommand{\arraystretch}{0.91}
+\newcommand{\Spt}{\textsc{S}}
+\newcommand{\Mpt}{\textsc{M}}
+\newcommand{\Cpt}{\textsc{C}}
+\newcommand{\Upt}{\textsc{U}}
+
+\title{\vspace{-1.2em}\textbf{Execution Before Evaluation\\in LLM Social Simulations}\vspace{-0.65em}}
+\author{Anonymous Shared-Task Submission}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2.15em}
+
+\begin{abstract}
+Many Worlds asks whether released simulation sweeps support declared social-scientific hypotheses. We audit this question at the level where a hypothesis can actually be tested: matched sweep cells, signed claim contrasts, and the event stream produced by the simulator. Across all five sweeps (5,213 runs), the execution check finds three real interface failures. Free-text game parsers select an earlier legal value rather than the model-emitted final parameter line in 288 game actions. Multi-tool mode expands Persona Expression decisions into 2,289 extra post events. Polarization executes 60,634 social events beyond the advertised three-action cap. A strict-integer probe study is the zero-discrepancy control. The failures do not have one uniform effect: Beauty Contest changes two target verdicts, while IPD changes none. The resulting claim audit separates supported, contradicted, mixed, and unavailable hypotheses without treating missing design cells as evidence. The main lesson is simple: a simulation result is not ready to evaluate until the claim, the matched design, and the executed event stream refer to the same object.
+\end{abstract}
+\vspace{-0.55em}
+
+\section{From sensitivity to auditable claims}
+Prior work shows that LLM social simulations can be sensitive to prompt wording and persona specification \cite{ju2024,ye2026}. Multiverse analysis gives a broader language for reporting dependence on researcher choices \cite{linde2026}, and TRAILS argues that robustness should be measured per claim and model rather than assumed \cite{ye2026}. EASE and SiliSocS make such studies more reproducible by separating environments, agents, engines, and evaluations \cite{sarangi2026}. Our contribution is narrower and concrete for this task: before asking whether a hypothesis is robust, we check whether the released data identifies the claim and whether the recorded events preserve the intended measurement unit.
+
+For atomic hypothesis $h$, the audit defines a signed run-level effect $\tau_h$ such that $\tau_h>0$ supports the registered direction. Paired claims compare treatment and reference at the same seed and all remaining signal variables; one-arm claims use an explicit threshold. A non-default design level is auditable only if both arms exist while other design variables stay at default. Missing arms yield \Upt~(unidentified), never an imputed robustness score. We report an equal-context-stratum mean and a 95\% envelope combining context-then-seed and seed-only resampling. These are conditional sensitivity intervals over the released seeds, not thousands of independent observations.
+
+\paragraph{Execution check.}
+For free-text actions we compare recorded events with the model-emitted final parameter line and replay the released parser definition. For multi-tool studies we reconstruct every generated call, match it to event logs, and inspect the pinned SiliSocS 0.2.0 control flow. Recorded events remain authoritative for what happened; alternative projections diagnose sensitivity rather than privileged ``intent.''
+
+\begin{table*}[t]
+\centering
+\scriptsize
+\caption{Execution-interface audit over every released sweep. ``Difference'' is interface-specific and is not pooled into a global score. The mechanism phrases in the final column are supported by released or pinned source.}
+\label{tab:interfaces}
+\begin{tabular}{@{}lrlr p{3.45cm} p{5.45cm}@{}}
+\toprule
+Study & runs & interface & difference & scope & consequence \\
+\midrule
+Beauty & 670 & free-text integer & 230/1,340 & all Gemma actions; 115 runs & parser takes first legal integer, not final \texttt{number:}; H2 and H6b target verdicts change \\
+Iterated PD & 3,465 & free-text label & 58/69,300 & Gemma divergences; canonical labels only & parser takes earliest displayed label, not later \texttt{choice:}; effect sizes change but target verdicts do not \\
+Persona Expression & 528 & multi-tool posts & +2,289 posts & 961 multi-call decisions; 180 runs & one decision becomes several posts; one-post projection shifts run diversity by at most .078 \\
+Observed Norms & 330 & integer probe & 0/36,720 & every response is one in-range integer & clean execution control; three human-anchor claims remain unavailable without licensed WVS anchors \\
+Polarization & 220 & multi-tool + probe & +60,634 events & 23,327 agent-turns exceed three actions; max 686 & runtime resolves a batch before updating the cap; 20 calls are rejected and 3 probes fail \\
+\bottomrule
+\end{tabular}
+\vspace{-0.65em}
+\end{table*}
+
+\section{Five sweeps, different verdicts}
+Table~\ref{tab:interfaces} shows why execution fidelity cannot be inferred from file existence or successful completion. The Beauty parser's first-integer rule can turn reasoning about a 20-point bonus into action 20 even when a later parameter line says \texttt{number: 19}. In IPD, mentioning \texttt{DEFECT} while explaining why it should be avoided can override a later \texttt{choice: COOPERATE} line. Exact source replay reproduces every recorded game action. Conversely, Observed Norms' strict integer interface is perfectly faithful. Interface choice, not simply model family, determines whether free-form reasoning can leak into action extraction.
+
+Multi-tool simulations expose a different measurement problem. Persona Expression's README and world define one post per agent-step, but multi-call mode lets a single decision emit multiple posts; retaining only the first call changes no selected target verdict, yet shifts per-run lexical diversity by as much as .078. Polarization advertises at most three actions per turn, but its runtime resolves an entire generated batch before updating the counter. Thus 23,327 turns execute above the cap, including one 686-action turn. We do not fabricate counterfactual truncated trajectories; cap violations, rejected calls, and failed probes are reported as data-quality findings.
+
+\begin{table*}[t]
+\centering
+\scriptsize
+\caption{Selected atomic claims. Positive effects support the registered direction. Design reports only identifiable non-default cells.}
+\label{tab:claims}
+\begin{tabular}{@{}llrcl@{}}
+\toprule
+Study & atomic claim & signed effect [95\% CI] & target & identifiable-design verdict \\
+\midrule
+Beauty Contest & cycle raises choice & $1.55\ [.38,2.79]$ & \Spt & mixed; final-parameter projection is \Mpt \\
+Iterated PD & risk framing lowers cooperation & $.252\ [.181,.324]$ & \Spt & positive in 9/9 cells \\
+Persona Expression & demographic exceeds generic diversity & $.081\ [.050,.112]$ & \Spt & \Upt \\
+Observed Norms & observation compresses within-population dispersion & $.572\ [.224,.965]$ & \Spt & not varied \\
+Polarization & stance-similar exposure raises edge alignment & $-.032\ [-.053,-.012]$ & \Cpt & nonpositive in 5/5 cells \\
+Polarization & credulous personas shift more than skeptical personas & $.170\ [.114,.232]$ & \Spt & positive in 5/5 cells \\
+\bottomrule
+\end{tabular}
+\vspace{-0.55em}
+\end{table*}
+
+The claim audit is deliberately discriminative (Table~\ref{tab:claims}). Beauty's average cycle effect is positive, but its identifiable design cells are mixed and its target verdict becomes inconclusive under the final-field projection. By contrast, IPD risk framing lowers cooperation by .252 and remains positive in all nine identifiable design cells. Persona richness has diminishing returns: demographic personas exceed generic ones, full biographies add only .004, and the registered sociopsychological-over-biography direction is contradicted ($-.012[-.015,-.010]$). Observation compresses within-population norm-response dispersion, while WVS-fidelity claims are \Upt because licensed anchors are absent. In Polarization, stance-similar exposure \emph{reduces} edge-alignment gain across every identifiable design cell, whereas credulous personas shift more than skeptical ones. The audit therefore neither labels all simulations fragile nor rewards large marginal effects automatically.
+
+\section{Implication and scope}
+A valid Shared-Task evaluation should return the claim direction, the matched-design evidence, and the execution check together. Reporting prompt sensitivity alone is not enough when the runtime can change the measured action or the number of measured events. This audit exposes when a result is supported, contradicted, mixed, or unavailable, and when runtime semantics become part of what the simulation measured.
+
+Our claims are confined to the released sweeps, five-to-eight seeds per condition, and the pinned source versions. We do not infer counterfactual societies after truncating or repairing actions. The supplement contains every atomic contrast, design-cell audit, parser/runtime excerpt with hashes, run-level mapping, and a one-command reproduction pipeline.
+
+\vspace{-0.45em}
+\begin{thebibliography}{9}
+\scriptsize
+\setlength{\itemsep}{-0.2em}
+\bibitem{ju2024} D.~Ju, A.~Williams, B.~Karrer, and M.~Nickel. Sense and sensitivity: Evaluating the simulation of social dynamics via LLMs. arXiv:2412.05093, 2024.
+\bibitem{linde2026} M.~Linde, J.~Sun, P.~Balluff, D.~Radovanovi\'c, and C.-h.~Chan. Making uncertainty visible: Multiverse analysis for robust computational social science. arXiv:2605.19745, 2026.
+\bibitem{sarangi2026} S.~Sarangi, M.~P.~Touzel, A.~B\"uck-Kaeffer, Z.~Yang, J.-F.~Godbout, and R.~Rabbany. EASE configuration facilitates a reproducible science of LLM social simulations. arXiv:2605.30258, 2026.
+\bibitem{ye2026} J.~Ye, L.~Cao, D.~Chen, and E.~Ferrara. Stop drawing scientific claims from LLM social simulations without robustness audits. arXiv:2605.18890, 2026.
+\bibitem{manyworlds2026} Many Worlds organizers. COLM 2026 Shared Task on Evaluating LLM Social Simulations. Official task page and repository, 2026.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,76 @@
+{
+  "status": "PASS",
+  "paper": "paper\\main_final.tex",
+  "pdf": "paper\\main_final.pdf",
+  "pdf_pages": 2,
+  "ledger_rows": 43,
+  "verified_rows": 43,
+  "missing_tokens": [],
+  "missing_required_phrases": [],
+  "source_integrity": {
+    "beauty_contest": {
+      "tarball_exists": true,
+      "tarball_sha256": "62e80580beaa63af652942ecd1d2953640c34e7606539a91a6fc455ee4a34f95",
+      "tarball_sha256_expected": "62e80580beaa63af652942ecd1d2953640c34e7606539a91a6fc455ee4a34f95",
+      "tarball_ok": true,
+      "manifest_exists": true,
+      "manifest_sha256": "7370f6dde54f4497ff3a63d81fc196c28d2cb25b06a29e386be5d45255e0d26c",
+      "manifest_sha256_expected": "7370f6dde54f4497ff3a63d81fc196c28d2cb25b06a29e386be5d45255e0d26c",
+      "manifest_ok": true
+    },
+    "iterated_pd": {
+      "tarball_exists": true,
+      "tarball_sha256": "8a5590c95b8ace0f4d6552fa9885d0ac7dbbc918a485cb1667d91da779f69365",
+      "tarball_sha256_expected": "8a5590c95b8ace0f4d6552fa9885d0ac7dbbc918a485cb1667d91da779f69365",
+      "tarball_ok": true,
+      "manifest_exists": true,
+      "manifest_sha256": "d9d51bc54136583c05761853d69cea023b77614a2816b473c6626658a6cba335",
+      "manifest_sha256_expected": "d9d51bc54136583c05761853d69cea023b77614a2816b473c6626658a6cba335",
+      "manifest_ok": true
+    },
+    "observed_norms": {
+      "tarball_exists": true,
+      "tarball_sha256": "686e324ae66bbc6f7a5f22aea4766819d13b9dc00c3fd866992782983f18e2bf",
+      "tarball_sha256_expected": "686e324ae66bbc6f7a5f22aea4766819d13b9dc00c3fd866992782983f18e2bf",
+      "tarball_ok": true,
+      "manifest_exists": true,
+      "manifest_sha256": "e6b01c59a754b0eedbd2a47df162b53e61de3b4d798c3d5a134fabd78fe5a6d4",
+      "manifest_sha256_expected": "e6b01c59a754b0eedbd2a47df162b53e61de3b4d798c3d5a134fabd78fe5a6d4",
+      "manifest_ok": true
+    },
+    "persona_expression": {
+      "tarball_exists": true,
+      "tarball_sha256": "6e8d28894d7deb73fa6c8ccd92c2270a78111f92a86e1487c6fea9ab5c0c16f8",
+      "tarball_sha256_expected": "6e8d28894d7deb73fa6c8ccd92c2270a78111f92a86e1487c6fea9ab5c0c16f8",
+      "tarball_ok": true,
+      "manifest_exists": true,
+      "manifest_sha256": "d197bf081ce2663c1587529eb1020b82e939c1ae832b644b255ec5a80f07ef58",
+      "manifest_sha256_expected": "d197bf081ce2663c1587529eb1020b82e939c1ae832b644b255ec5a80f07ef58",
+      "manifest_ok": true
+    },
+    "polarization": {
+      "tarball_exists": true,
+      "tarball_sha256": "b506d9e84d765fd1e66bb0d19c01a1ef572e52b85c085616508c5c2b7d5d96e2",
+      "tarball_sha256_expected": "b506d9e84d765fd1e66bb0d19c01a1ef572e52b85c085616508c5c2b7d5d96e2",
+      "tarball_ok": true,
+      "manifest_exists": true,
+      "manifest_sha256": "0b11c3df2a161d870e78112e2874baf62361e34991c2fa963573f461ff8647fa",
+      "manifest_sha256_expected": "0b11c3df2a161d870e78112e2874baf62361e34991c2fa963573f461ff8647fa",
+      "manifest_ok": true
+    }
+  },
+  "cross_study_totals": {
+    "studies": 5,
+    "runs": 5213,
+    "structured_probe_calls": 135280,
+    "game_action_calls": 70640,
+    "social_tool_decisions": 254144,
+    "free_text_action_field_divergences": 288,
+    "persona_extra_post_events": 2289,
+    "polarization_executed_events_above_cap": 60634,
+    "polarization_overshoot_turns": 23327,
+    "polarization_unexecuted_generated_calls": 20,
+    "polarization_missing_probes": 3
+  },
+  "scope": "All findings are confined to the released sweeps and pinned runtime/source versions. Counterfactual social trajectories are not imputed when execution truncation would require rerunning the simulation."
+}

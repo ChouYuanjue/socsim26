@@ -1,0 +1,31 @@
+# @package _global_
+scenario_name: persona_expression
+jobname_format: PersonaExpr_N${num_agents}_T${num_steps}_${run_name}
+num_agents: 30
+num_steps: 4
+seed: 42
+run_name: persona_expression
+# Interaction-pathway knobs, consumed via interpolation in env.yaml. Top-level
+# so they are part of the Hydra composition. This is the CLOSED arm: agents
+# receive no peer content and there is no follow graph.
+pe_pathway: closed
+pe_followership_prob: 0.0
+# Persona-roster selection (consumed by agents/default.yaml). Defaults == the
+# persona_richness base (full-bio rung) and the unmodified roster.
+pe_roster_path: ${oc.env:SOCSIM_REPO_ROOT}/studies/persona_expression/scenario/assets/personas/roster.json
+pe_context_field: context_full_bio
+pe_name_field: name
+pe_username_field: username
+setting:
+  name: Open Posting Feed
+  background:
+  - A social media feed on which a population of users each compose posts.
+  - |-
+    The same neutral, open-ended prompt is given to every agent; what each one posts is shaped by its persona, the action-style instruction, and the model.
+  - |-
+    Per-agent post content (action_events.jsonl) is the dependent observable; the dispersion of those posts across the population is the inter-agent diversity of interest.
+event:
+  name: Open posting session
+  context: |-
+    You have opened the app. Share what is on your mind right now — post whatever you would actually want to say. There is no assigned topic.
+data: {}

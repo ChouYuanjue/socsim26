@@ -1,0 +1,12 @@
+{
+  "source_path": "references/socsim26_sharedtask/task_components/game.py",
+  "sha256": "88eebe98a6c4b07ae0f2f160d892322ba848c6976537d652ec1cfe0329ed30d3",
+  "function": "parse_number_choice",
+  "start_line": 119,
+  "end_line": 124,
+  "source": "def parse_number_choice(text: str) -> int | None:\n    \"\"\"Extract an integer 11-20 from agent action text.\"\"\"\n    matches = re.findall(r\"\\b(1[1-9]|20)\\b\", str(text or \"\"))\n    if matches:\n        return int(matches[0])\n    return None",
+  "execution_mode": "exact AST definition compiled with standard-library re",
+  "recorded_action_replay_accuracy": 1.0,
+  "agent_actions": 1340,
+  "divergent_explicit_action_fields": 230
+}

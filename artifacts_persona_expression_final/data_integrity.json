@@ -1,0 +1,11 @@
+{
+  "manifest_rows": 528,
+  "parsed_runs": 528,
+  "model_decisions": 63360,
+  "executed_posts": 65649,
+  "all_event_posts_replayed_from_raw_tool_calls": true,
+  "multi_call_guidance_present_for_every_decision": true,
+  "errors": [],
+  "manifest_sha256": "d197bf081ce2663c1587529eb1020b82e939c1ae832b644b255ec5a80f07ef58",
+  "tarball_sha256": "6e8d28894d7deb73fa6c8ccd92c2270a78111f92a86e1487c6fea9ab5c0c16f8"
+}

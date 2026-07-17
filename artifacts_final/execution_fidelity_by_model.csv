@@ -1,0 +1,5 @@
+model,agent_actions,recorded_equals_explicit_parameter,explicit_parameter_fidelity,divergent_actions,recorded_equals_first_valid_token
+gemma-4-31b,270,40,0.14814814814814814,230,1.0
+qwen3.5-27b-fp8,530,530,1.0,0,1.0
+qwen3.5-4b,270,270,1.0,0,1.0
+qwen3.5-9b,270,270,1.0,0,1.0

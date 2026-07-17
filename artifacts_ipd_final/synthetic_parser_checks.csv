@@ -1,0 +1,12 @@
+check,text,released,strict,expected_divergence,diverges,passes
+money_reasoning_mentions_bonus_before_action,"The 20-point bonus makes 19 attractive.
+ACTION: CHOOSE_NUMBER
+number: 19",20,19,True,True,True
+pd_reasoning_mentions_defect_before_cooperate_action,"I will avoid triggering DEFECT.
+ACTION: CHOOSE_PD_ACTION
+choice: COOPERATE",DEFECT,COOPERATE,True,True,True
+pd_relabelled_reasoning_mentions_blue_before_green_action,"I will avoid BLUE.
+ACTION: CHOOSE_PD_ACTION
+choice: GREEN",DEFECT,COOPERATE,True,True,True
+exact_action_only,"ACTION: CHOOSE_PD_ACTION
+choice: DEFECT",DEFECT,DEFECT,False,False,True

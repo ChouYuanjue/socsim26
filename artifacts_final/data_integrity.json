@@ -1,0 +1,22 @@
+{
+  "manifest_rows": 670,
+  "parsed_runs": 670,
+  "agent_choices": 1340,
+  "errors": [],
+  "explicit_action_parameters_parsed_runs": 670,
+  "first_valid_tokens_parsed_runs": 670,
+  "prompt_action_exact_run_matches": 555,
+  "prompt_action_multiset_run_matches": 555,
+  "first_token_action_exact_run_matches": 670,
+  "divergent_runs": 115,
+  "divergent_agent_actions": 230,
+  "divergent_models": [
+    "gemma-4-31b"
+  ],
+  "all_recorded_actions_match_first_valid_legal_token": true,
+  "all_prompts_expose_choose_number_schema": true,
+  "all_prompts_require_exactly_one_action": true,
+  "manifest_sha256": "7370f6dde54f4497ff3a63d81fc196c28d2cb25b06a29e386be5d45255e0d26c",
+  "tarball_sha256": "62e80580beaa63af652942ecd1d2953640c34e7606539a91a6fc455ee4a34f95",
+  "input_mode": "direct official tar-member read"
+}

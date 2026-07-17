@@ -1,0 +1,21 @@
+# generated / local
+__pycache__/
+*.pyc
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+
+# official raw data and extracted runs are intentionally excluded
+references/socsim26_sharedtask/socsim26_data/
+**/*_sweep.tar.gz
+**/runs/
+**/prompts_and_responses.jsonl.gz
+**/action_events.jsonl.gz
+
+# regenerable high-granularity tables omitted from GitHub to keep clone size sane
+artifacts_ipd_final/action_projection.csv
+artifacts_persona_expression_final/decision_level.csv
+artifacts_polarization_final/decision_level.csv

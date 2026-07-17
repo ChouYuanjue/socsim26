@@ -1,0 +1,29 @@
+action_mode: generic
+tool_calling:
+  mode: multi
+initialization:
+  agents:
+    built_in: raw_memory
+    class_path: null
+    params: {}
+  game_masters:
+    built_in: default
+    class_path: null
+    params: {}
+  simulation:
+    built_in: none
+    class_path: null
+    params: {}
+engine:
+  step:
+    built_in: base
+    params:
+      flow_order:
+      - fixed_pre
+      - default
+      agent_to_flow: {}
+  turn_policy:
+    built_in: open_ended
+    params:
+      max_actions: 3
+      finished_action_signal: FINISHED

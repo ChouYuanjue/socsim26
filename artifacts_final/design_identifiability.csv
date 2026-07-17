@@ -1,0 +1,65 @@
+claim_id,official_parent,design_variable,design_level,identifiable,n_strata,n_seed_effects,reason
+H1,h1_human_anchor,instruction_wording,descending-range,True,1,5,matched claim arms exist under the non-default design level
+H1,h1_human_anchor,instruction_wording,numbers-as-words,True,1,5,matched claim arms exist under the non-default design level
+H1,h1_human_anchor,instruction_wording,paraphrase-a,True,1,5,matched claim arms exist under the non-default design level
+H1,h1_human_anchor,instruction_wording,paraphrase-b,True,1,5,matched claim arms exist under the non-default design level
+H1,h1_human_anchor,response_format,bare-number,True,1,5,matched claim arms exist under the non-default design level
+H1,h1_human_anchor,temperature,1.0,True,4,20,matched claim arms exist under the non-default design level
+H1,h1_human_anchor,persona_format,descriptive,True,1,5,matched claim arms exist under the non-default design level
+H1,h1_human_anchor,persona_format,tabular,True,1,5,matched claim arms exist under the non-default design level
+H2,h2_cycle_shift,instruction_wording,descending-range,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H2,h2_cycle_shift,instruction_wording,numbers-as-words,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H2,h2_cycle_shift,instruction_wording,paraphrase-a,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H2,h2_cycle_shift,instruction_wording,paraphrase-b,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H2,h2_cycle_shift,response_format,bare-number,True,2,10,matched claim arms exist under the non-default design level
+H2,h2_cycle_shift,temperature,1.0,True,4,20,matched claim arms exist under the non-default design level
+H2,h2_cycle_shift,persona_format,descriptive,True,2,10,matched claim arms exist under the non-default design level
+H2,h2_cycle_shift,persona_format,tabular,True,2,10,matched claim arms exist under the non-default design level
+H3,h3_costless_depth_bound,instruction_wording,descending-range,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H3,h3_costless_depth_bound,instruction_wording,numbers-as-words,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H3,h3_costless_depth_bound,instruction_wording,paraphrase-a,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H3,h3_costless_depth_bound,instruction_wording,paraphrase-b,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H3,h3_costless_depth_bound,response_format,bare-number,True,2,10,matched claim arms exist under the non-default design level
+H3,h3_costless_depth_bound,temperature,1.0,True,4,20,matched claim arms exist under the non-default design level
+H3,h3_costless_depth_bound,persona_format,descriptive,True,2,10,matched claim arms exist under the non-default design level
+H3,h3_costless_depth_bound,persona_format,tabular,True,2,10,matched claim arms exist under the non-default design level
+H4,h4_strategic_framing,instruction_wording,descending-range,True,1,5,matched claim arms exist under the non-default design level
+H4,h4_strategic_framing,instruction_wording,numbers-as-words,True,1,5,matched claim arms exist under the non-default design level
+H4,h4_strategic_framing,instruction_wording,paraphrase-a,True,1,5,matched claim arms exist under the non-default design level
+H4,h4_strategic_framing,instruction_wording,paraphrase-b,True,1,5,matched claim arms exist under the non-default design level
+H4,h4_strategic_framing,response_format,bare-number,True,3,15,matched claim arms exist under the non-default design level
+H4,h4_strategic_framing,temperature,1.0,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H4,h4_strategic_framing,persona_format,descriptive,True,3,15,matched claim arms exist under the non-default design level
+H4,h4_strategic_framing,persona_format,tabular,True,3,15,matched claim arms exist under the non-default design level
+H5a,h5_model_scale,instruction_wording,descending-range,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H5a,h5_model_scale,instruction_wording,numbers-as-words,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H5a,h5_model_scale,instruction_wording,paraphrase-a,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H5a,h5_model_scale,instruction_wording,paraphrase-b,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H5a,h5_model_scale,response_format,bare-number,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H5a,h5_model_scale,temperature,1.0,True,3,15,matched claim arms exist under the non-default design level
+H5a,h5_model_scale,persona_format,descriptive,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H5a,h5_model_scale,persona_format,tabular,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H5b,h5_model_scale,instruction_wording,descending-range,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H5b,h5_model_scale,instruction_wording,numbers-as-words,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H5b,h5_model_scale,instruction_wording,paraphrase-a,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H5b,h5_model_scale,instruction_wording,paraphrase-b,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H5b,h5_model_scale,response_format,bare-number,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H5b,h5_model_scale,temperature,1.0,True,3,15,matched claim arms exist under the non-default design level
+H5b,h5_model_scale,persona_format,descriptive,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H5b,h5_model_scale,persona_format,tabular,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H6a,h6_persona_disposition,instruction_wording,descending-range,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H6a,h6_persona_disposition,instruction_wording,numbers-as-words,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H6a,h6_persona_disposition,instruction_wording,paraphrase-a,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H6a,h6_persona_disposition,instruction_wording,paraphrase-b,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H6a,h6_persona_disposition,response_format,bare-number,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H6a,h6_persona_disposition,temperature,1.0,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H6a,h6_persona_disposition,persona_format,descriptive,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H6a,h6_persona_disposition,persona_format,tabular,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H6b,h6_persona_disposition,instruction_wording,descending-range,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H6b,h6_persona_disposition,instruction_wording,numbers-as-words,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H6b,h6_persona_disposition,instruction_wording,paraphrase-a,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H6b,h6_persona_disposition,instruction_wording,paraphrase-b,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H6b,h6_persona_disposition,response_format,bare-number,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H6b,h6_persona_disposition,temperature,1.0,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H6b,h6_persona_disposition,persona_format,descriptive,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+H6b,h6_persona_disposition,persona_format,tabular,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"

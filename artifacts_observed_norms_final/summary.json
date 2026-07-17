@@ -1,0 +1,44 @@
+{
+  "study": "observed_norms",
+  "runs": 330,
+  "probe_calls": 36720,
+  "strict_integer_fidelity": 1.0,
+  "released_parser_replay_accuracy": 1.0,
+  "identifiable_claim": {
+    "claim_id": "N3",
+    "official_parent": "h3_interaction_compression",
+    "short_label": "observation reduces within-population response dispersion",
+    "point_estimate": 0.5724906065485775,
+    "pooled_run_mean": 0.5724906065485776,
+    "median_stratum": 0.39794685990338163,
+    "sign_consistency": 0.7333333333333333,
+    "n_strata": 30,
+    "n_seed_effects": 180,
+    "seeds": "6001;6002;6003;6004;6005;6006",
+    "hier_ci_low": 0.22394231414385407,
+    "hier_ci_high": 0.964916046027912,
+    "seed_ci_low": 0.5253354804079441,
+    "seed_ci_high": 0.6101382179280731,
+    "ci_low": 0.22394231414385407,
+    "ci_high": 0.964916046027912,
+    "target_verdict": "supported"
+  },
+  "nonidentifiable_official_claims": [
+    {
+      "official_parent": "h1_country_direction",
+      "status": "not_identifiable_from_released_package",
+      "reason": "registered WVS human anchors are not distributed because of licensing"
+    },
+    {
+      "official_parent": "h2_private_homogenization",
+      "status": "not_identifiable_from_released_package",
+      "reason": "claim compares model dispersion with WVS respondent dispersion, which is not distributed"
+    },
+    {
+      "official_parent": "h5_model_capability",
+      "status": "not_identifiable_from_released_package",
+      "reason": "directional accuracy is defined relative to unavailable WVS anchors"
+    }
+  ],
+  "interpretation": "Observed Norms is a negative execution-control: every output is exactly one in-range integer. Human-fidelity claims remain unavailable without licensed WVS anchors; only within-simulation observation effects are directly auditable."
+}

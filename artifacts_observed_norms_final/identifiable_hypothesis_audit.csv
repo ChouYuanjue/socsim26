@@ -1,0 +1,2 @@
+claim_id,official_parent,short_label,point_estimate,pooled_run_mean,median_stratum,sign_consistency,n_strata,n_seed_effects,seeds,hier_ci_low,hier_ci_high,seed_ci_low,seed_ci_high,ci_low,ci_high,target_verdict
+N3,h3_interaction_compression,observation reduces within-population response dispersion,0.5724906065485775,0.5724906065485776,0.39794685990338163,0.7333333333333333,30,180,6001;6002;6003;6004;6005;6006,0.22394231414385407,0.964916046027912,0.5253354804079441,0.6101382179280731,0.22394231414385407,0.964916046027912,supported

@@ -1,0 +1,21 @@
+study,claim_id,short_label,point_estimate,ci_low,ci_high,target_verdict,design_verdict,source_file,source_row_key
+Beauty Contest,H2,cycle shifts choice upward,1.5499999999999998,0.378125,2.7906250000000004,supported,mixed_across_identifiable_cells,artifacts_final/hypothesis_audit.csv,claim_id=H2
+Beauty Contest,H3,costless majority at 17--20,0.5,0.5,0.5,supported,positive_direction_but_uncertain,artifacts_final/hypothesis_audit.csv,claim_id=H3
+Beauty Contest,H5b,27B depth minus 9B,-1.8333333333333333,-3.0084375,-0.8250000000000001,contradicted,negative_direction_but_uncertain,artifacts_final/hypothesis_audit.csv,claim_id=H5b
+Iterated PD,P1b,risk lowers cooperation,0.2519444444444444,0.180970486111111,0.3243177083333334,supported,positive_direction_all_identifiable_cells,artifacts_ipd_final/hypothesis_audit.csv,claim_id=P1b
+Iterated PD,P2b,amplified stakes do not lower cooperation,-0.0571527777777777,-0.1045885416666666,-0.0143038194444444,contradicted,mixed_across_identifiable_cells,artifacts_ipd_final/hypothesis_audit.csv,claim_id=P2b
+Iterated PD,P6a,cooperative stance raises cooperation,0.3043518518518518,0.2209259259259259,0.3954699074074074,supported,not_identifiable,artifacts_ipd_final/hypothesis_audit.csv,claim_id=P6a
+Iterated PD,P6b,competitive stance lowers cooperation,0.322037037037037,0.2427708333333333,0.4003703703703703,supported,not_identifiable,artifacts_ipd_final/hypothesis_audit.csv,claim_id=P6b
+Persona Expression,E1a,demographic exceeds generic diversity,0.080693932953381,0.0496508931615672,0.1118295246535077,supported,not_identifiable,artifacts_persona_expression_final/hypothesis_audit.csv,claim_id=E1a
+Persona Expression,E1b,full biography exceeds demographic diversity,0.0042219374221419,0.0017687822258919,0.0065771894276583,supported,not_identifiable,artifacts_persona_expression_final/hypothesis_audit.csv,claim_id=E1b
+Persona Expression,E1c,sociopsychological exceeds full-biography diversity,-0.0123444304326226,-0.0150651249400988,-0.0095783195000567,contradicted,not_identifiable,artifacts_persona_expression_final/hypothesis_audit.csv,claim_id=E1c
+Persona Expression,E3b,9B diversity is at least 27B diversity,-0.0259341919229493,-0.0458373031962921,-0.0073635747379471,contradicted,not_identifiable,artifacts_persona_expression_final/hypothesis_audit.csv,claim_id=E3b
+Observed Norms,N3,observation reduces within-population response dispersion,0.5724906065485775,0.223942314143854,0.964916046027912,supported,,artifacts_observed_norms_final/identifiable_hypothesis_audit.csv,claim_id=N3
+Polarization,Z1,stance-similar exposure raises edge-alignment gain,-0.0315820312499999,-0.0527353515625,-0.0118745117187499,contradicted,nonpositive_all_identifiable_cells,artifacts_polarization_final/hypothesis_audit.csv,claim_id=Z1
+Polarization,Z6,stance-similar exceeds opposite-stance clustering,-0.0033854166666666,-0.02005859375,0.0145833333333333,mixed_or_inconclusive,not_identifiable,artifacts_polarization_final/hypothesis_audit.csv,claim_id=Z6
+Polarization,Z2a,scale-free exceeds random under chronological exposure,0.00078125,-0.02421875,0.02109375,mixed_or_inconclusive,not_identifiable,artifacts_polarization_final/hypothesis_audit.csv,claim_id=Z2a
+Polarization,Z2b,small-world exceeds random under chronological exposure,-0.0359375,-0.0578125,-0.01796875,contradicted,not_identifiable,artifacts_polarization_final/hypothesis_audit.csv,claim_id=Z2b
+Polarization,Z2c,scale-free exceeds random under stance-similar exposure,-0.01171875,-0.0328125,0.00859375,mixed_or_inconclusive,not_identifiable,artifacts_polarization_final/hypothesis_audit.csv,claim_id=Z2c
+Polarization,Z2d,small-world exceeds random under stance-similar exposure,-0.03046875,-0.053125,-0.00390625,contradicted,not_identifiable,artifacts_polarization_final/hypothesis_audit.csv,claim_id=Z2d
+Polarization,Z3,no-memory increases opinion volatility,-0.0227678571428571,-0.0285714285714285,-0.0169642857142857,contradicted,not_identifiable,artifacts_polarization_final/hypothesis_audit.csv,claim_id=Z3
+Polarization,Z4,credulous personas shift more than skeptical personas,0.1704963235294117,0.1136029411764706,0.231985294117647,supported,positive_direction_all_identifiable_cells,artifacts_polarization_final/hypothesis_audit.csv,claim_id=Z4

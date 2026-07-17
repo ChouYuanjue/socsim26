@@ -1,0 +1,11 @@
+{
+  "manifest_rows": 330,
+  "parsed_runs": 330,
+  "probe_calls": 36720,
+  "released_parser_replay_accuracy": 1.0,
+  "strict_integer_fidelity": 1.0,
+  "exact_integer_outputs": 36720,
+  "errors": [],
+  "manifest_sha256": "e6b01c59a754b0eedbd2a47df162b53e61de3b4d798c3d5a134fabd78fe5a6d4",
+  "tarball_sha256": "686e324ae66bbc6f7a5f22aea4766819d13b9dc00c3fd866992782983f18e2bf"
+}

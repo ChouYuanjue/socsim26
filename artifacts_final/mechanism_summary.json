@@ -1,0 +1,10 @@
+{
+  "scope": "basic variant, qwen3.5-27b-fp8, neutral persona",
+  "default_conditions": 2,
+  "variation_conditions": 12,
+  "default_mean_entropy_bits": 0.44064544961534635,
+  "variation_mean_entropy_bits": 0.22504774880332898,
+  "near_deterministic_variation_conditions_modal_share_ge_0_9": 10,
+  "variation_conditions_modal_choice_19": 8,
+  "interpretation": "Surface-equivalent representations often select low-entropy, discrete choice regimes rather than merely adding diffuse sampling noise. This is observable policy selection, not proof of a latent causal mechanism."
+}

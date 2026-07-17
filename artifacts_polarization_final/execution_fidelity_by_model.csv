@@ -1,0 +1,5 @@
+model,runs,tool_call_decisions,generated_overshoot_turns,generated_calls_above_cap,executed_overshoot_turns,executed_events_above_cap,unexecuted_generated_calls
+gemma-4-31b,15,9078,1232,2088,1232,2088,0
+qwen3.5-27b-fp8,175,148687,17130,37746,17130,37746,0
+qwen3.5-4b,15,19237,1057,1246,1049,1238,16
+qwen3.5-9b,15,13782,3916,19562,3916,19562,4

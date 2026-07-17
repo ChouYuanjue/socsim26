@@ -1,0 +1,78 @@
+{
+  "generated_by": "analysis/observed_norms_audit.py",
+  "inputs": [
+    {
+      "path": "references/socsim26_sharedtask/socsim26_data/observed_norms_sweep.tar.gz",
+      "bytes": 3605649,
+      "sha256": "686e324ae66bbc6f7a5f22aea4766819d13b9dc00c3fd866992782983f18e2bf"
+    },
+    {
+      "path": "references/socsim26_sharedtask/socsim26_data/observed_norms/sweeps/manifest.csv",
+      "bytes": 128090,
+      "sha256": "e6b01c59a754b0eedbd2a47df162b53e61de3b4d798c3d5a134fabd78fe5a6d4"
+    },
+    {
+      "path": "references/socsim26_sharedtask/task_components/norms.py",
+      "bytes": 14042,
+      "sha256": "af9c178887df8e33120925ce7af7e075636d6cc65b1d0bea22d63d10e702c9a9"
+    }
+  ],
+  "metadata": {
+    "bootstrap_replicates": 4000,
+    "seed": 20260719,
+    "runs": 330,
+    "probe_calls": 36720
+  },
+  "files": [
+    {
+      "path": "country_rank_stability.csv",
+      "bytes": 4077,
+      "sha256": "ac9c8d77d9c87c3448925a476a573cf960df7bbc2f8ee2b20ca71917b1ca4913"
+    },
+    {
+      "path": "country_rank_stability_summary.csv",
+      "bytes": 729,
+      "sha256": "04f5c7e9c598e7f93eaeb855c6f485f56bb2fe037ace91315f93b6441c2a244f"
+    },
+    {
+      "path": "data_integrity.json",
+      "bytes": 385,
+      "sha256": "06efbfed729e795744e873ecd5e0a27a91f7584c969f5eae4cb3271566fcf070"
+    },
+    {
+      "path": "dispersion_compression_effect_rows.csv",
+      "bytes": 56684,
+      "sha256": "5b9d197fb90e77c0c0a5a257ad955003d330b4c35b97a0295c054a29774dc379"
+    },
+    {
+      "path": "identifiable_hypothesis_audit.csv",
+      "bytes": 538,
+      "sha256": "40d450ba3f394bc4b5d7525ac41dda4a3baf714ce6557258734bba4e421c9298"
+    },
+    {
+      "path": "nonidentifiable_official_claims.csv",
+      "bytes": 447,
+      "sha256": "8842a3ed3cfae0f908ac6b1ab656ffbf8f98f516700d78f07d26f947040fcdf0"
+    },
+    {
+      "path": "parser_source_audit.json",
+      "bytes": 1009,
+      "sha256": "c5aafb96b10b244daf41dda13477414dd5b5c116bce5785aae639908470de4f9"
+    },
+    {
+      "path": "probe_level.csv",
+      "bytes": 17135445,
+      "sha256": "9f8d7c4adf7d6790154029f4a07ce37af000d9c6d8f8e03fe68ec755f7c8a971"
+    },
+    {
+      "path": "run_level.csv",
+      "bytes": 140957,
+      "sha256": "8c8aca3d6bf7c41e61961a8a78f29b7ef2b4ff4c7170fe5467f2cebd9a75e0df"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 1844,
+      "sha256": "d2c35dc6cbbccc290db0aa38f9ddb50d609a54623affb8ace3f2f6907708d11d"
+    }
+  ]
+}

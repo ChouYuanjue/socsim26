@@ -1,0 +1,193 @@
+study: observed_norms
+title: Does public observation help or hurt cross-cultural value matching?
+question: >-
+  When simulated respondents from different countries answer a value battery in
+  public — each seeing the others' answers — does that interaction move the
+  population toward or away from the real human anchor, and does it matter
+  whether the group is culturally homogeneous or mixed? Which choices should
+  move the answers (population, whether opinions are observed, group
+  composition) and which — turn order, label wording — should not?
+track: shared
+
+anchors:
+  - id: wvs_w7_items
+    kind: survey_item
+    source: >-
+      World Values Survey Wave 7 (Haerpfer et al. 2022; 2017-2022, 64
+      countries). Items: Q1 family importance (near-universal control), Q182
+      homosexuality justifiability, Q188 euthanasia justifiability.
+    description: >-
+      Q1 is near ceiling in every surveyed country, so any cross-population
+      variation on it is invented; Q182/Q188 carry large, documented
+      cross-country variance. Distributions are NOT shipped (WVS license);
+      build them with get_anchor.py. Roster and matched-anchor pipeline are
+      shared with the observed_norms study.
+    fetch:
+      script: studies/observed_norms/get_anchor.py
+      note: >-
+        WVS registration required; data may not be redistributed.
+        To obtain the CSV: register at https://www.worldvaluessurvey.org/wvs.jsp,
+        go to Data & Documentation → Wave 7 → Download Data → CSV format
+        (file: WVS_Cross-National_Wave_7_csv_v6_0.csv). Place it under
+        studies/observed_norms/data/ (gitignored), then run get_anchor.py.
+  - id: worldvaluesbench
+    kind: literature
+    source: >-
+      Zhao et al. (LREC-COLING 2024), "WorldValuesBench": models homogenize
+      toward generic/WEIRD response patterns and demographic conditioning
+      helps only capable models.
+  - id: prism
+    kind: literature
+    source: >-
+      Kirk et al. (NeurIPS 2024), "PRISM": individuals' stated survey
+      preferences depart from the preferences they express in live
+      conversation.
+    description: >-
+      Grounds the goal-relative reading of h3: a stated-vs-contextual gap
+      exists in real humans, so drift away from the privately-elicited WVS
+      anchor under interaction is not automatically a failure.
+  - id: conformity_dynamics
+    kind: literature
+    source: >-
+      Multi-agent conformity work (Kang et al. 2025, arXiv:2507.22467;
+      arXiv:2506.01332; Taubenfeld et al. 2024): LLM groups reproduce
+      Asch-style majority influence; smaller models conform more; agents
+      converge toward base-model biases even with distinct personas.
+    description: >-
+      Predicts interaction-induced drift toward a shared, often WEIRD, default
+      — the threat to extrinsic matching.
+  - id: pimmur
+    kind: literature
+    source: >-
+      Zhou et al. (2025), "PIMMUR Principles": Interaction must be genuine
+      agent-to-agent influence, not injected summaries; collective effects
+      often vanish or reverse when this is enforced.
+    description: >-
+      Requires the observed protocols to reveal real prior statements rather
+      than aggregate summaries, or h3 measures a prompt artifact.
+
+hypotheses:
+  h1_country_direction:
+    statement: >-
+      In the private condition, simulated populations reproduce the known
+      cross-country differences on the high-variance items, while the
+      near-universal control item shows no spurious cross-population variation.
+    rationale: >-
+      The high-variance items have large documented differences; a simulation
+      that differentiates populations on Q1 is inventing them. This is the
+      baseline interaction is measured against.
+    signal_variables: [population]
+  h2_private_homogenization:
+    statement: >-
+      Even in the private condition, the simulation compresses
+      between-population differences relative to the human anchor.
+    rationale: >-
+      WorldValuesBench: models default to generic distributions, eroding group
+      differences first. Establishes baseline homogenization before any
+      interaction.
+    signal_variables: [population]
+  h3_interaction_compression:
+    statement: >-
+      Public observation moves populations away from their per-country anchor
+      relative to the private baseline, and the shift is larger under
+      mixed-country observation than homogeneous; the control item stays flat.
+    rationale: >-
+      Conformity drives convergence toward a shared default. Because the WVS
+      anchor is privately elicited, interaction-induced drift is off-target
+      relative to that goal by construction — but real respondents themselves
+      show a stated-vs-contextual gap (PRISM), so drift under interaction is
+      goal-dependent, not automatically a failure.
+    signal_variables: [condition, population]
+  h5_model_capability:
+    statement: >-
+      Per-population fidelity to the anchor grows with model scale, while
+      interaction-induced compression shrinks: the smaller model conditions
+      worse and conforms more.
+    rationale: >-
+      WorldValuesBench: small models cannot condition on demographics.
+      Conformity work: smaller models conform more.
+    signal_variables: [model]
+
+variables:
+  population:
+    role: signal
+    path: ccn_persona_path
+    base: ${oc.env:SOCSIM_REPO_ROOT}/studies/observed_norms/scenario/assets/personas/us.json
+    values:
+      - value: ${oc.env:SOCSIM_REPO_ROOT}/studies/observed_norms/scenario/assets/personas/us.json
+        label: us
+      - value: ${oc.env:SOCSIM_REPO_ROOT}/studies/observed_norms/scenario/assets/personas/netherlands.json
+        label: netherlands
+      - value: ${oc.env:SOCSIM_REPO_ROOT}/studies/observed_norms/scenario/assets/personas/jordan.json
+        label: jordan
+      - value: ${oc.env:SOCSIM_REPO_ROOT}/studies/observed_norms/scenario/assets/personas/japan.json
+        label: japan
+      # Country-balanced roster (6 agents each from the 4 countries); this is
+      # the only way agents observe genuinely different-culture peer answers.
+      - value: ${oc.env:SOCSIM_REPO_ROOT}/studies/observed_norms/scenario/assets/personas/mixed.json
+        label: mixed
+  condition:
+    role: signal
+    kind: group
+    group: interaction
+    base: private
+    values:
+      - value: private
+        label: private
+      - value: observed
+        label: observed
+  model:
+    role: signal
+    kind: model
+    base: qwen3.5-27b-fp8
+    values: [qwen3.5-27b-fp8, qwen3.5-9b, qwen3.5-4b, gemma-4-31b]
+  scale_labels:
+    role: design_variation
+    kind: group
+    group: world
+    base: default
+    values:
+      - value: default
+        label: justifiable
+      - value: labels_paraphrase
+        label: acceptable
+  framing:
+    # The single sentence shown above peers' round-1 answers in the observed
+    # round. Whether the label (vs the actual answers) shifts conformity is a
+    # neutral design variation for participants to investigate.
+    role: design_variation
+    path: obs_framing
+    base: neutral
+    values:
+      - value: neutral
+        label: neutral
+      - value: same_culture
+        label: same-culture
+      - value: different_culture
+        label: different-culture
+
+sweep:
+  signal_grid: [population, condition]
+  variations:
+    model:
+      # Capability sweep (h5): every model runs the full signal grid, so each
+      # condition is covered across the standard served gauntlet
+      # (qwen3.5 27b/9b/4b + cross-family gemma-4-31b).
+      cross: grid
+    scale_labels:
+      # Elicitation artifact, checked without an interaction confound.
+      cross: subset
+      subset:
+        - {condition: private}
+    framing:
+      # The framing sentence only exists once answers are observed.
+      cross: subset
+      subset:
+        - {condition: observed}
+  seeds: {start: 6001, count: 6}
+  operating_point: {}
+  world: default
+  timeout_seconds: 1800
+  estimates:
+    llm_calls_per_run: 96
+    minutes_per_run: null

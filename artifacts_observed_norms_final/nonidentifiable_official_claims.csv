@@ -1,0 +1,4 @@
+official_parent,status,reason
+h1_country_direction,not_identifiable_from_released_package,registered WVS human anchors are not distributed because of licensing
+h2_private_homogenization,not_identifiable_from_released_package,"claim compares model dispersion with WVS respondent dispersion, which is not distributed"
+h5_model_capability,not_identifiable_from_released_package,directional accuracy is defined relative to unavailable WVS anchors

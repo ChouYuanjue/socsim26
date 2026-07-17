@@ -1,0 +1,21 @@
+{
+  "agent_actions": 1340,
+  "divergent_agent_actions": 230,
+  "divergent_action_fraction": 0.17164179104477612,
+  "divergent_runs": 115,
+  "divergent_models": [
+    "gemma-4-31b"
+  ],
+  "recorded_matches_first_valid_legal_token_fraction": 1.0,
+  "divergent_recorded_matches_first_valid_legal_token_fraction": 1.0,
+  "prompts_exposing_choose_number_schema": 1340,
+  "prompts_requiring_exactly_one_action": 1340,
+  "all_prompts_expose_choose_number_schema": true,
+  "all_prompts_require_exactly_one_action": true,
+  "claims_with_target_verdict_change": [
+    "H2",
+    "H6b"
+  ],
+  "claims_with_design_status_change": [],
+  "interpretation": "Recorded action events are the simulation's executed behavior. The explicit final action parameter is a separate observable. Their divergence is not labelled model intent; it is an execution-fidelity failure. The first-valid-legal-token rule reproduces every recorded action in the released Beauty logs and therefore provides an auditable executor signature."
+}

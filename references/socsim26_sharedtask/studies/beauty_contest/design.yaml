@@ -1,0 +1,242 @@
+study: beauty_contest
+title: Level-k reasoning in the 11-20 money request game
+question: >-
+  Does a simulated player population reproduce the human choice distribution of
+  Arad & Rubinstein (2012) — including its documented shifts across game
+  variants — and is that behaviour robust to seemingly-unimportant changes in
+  how the identical game is worded and elicited?
+track: shared
+
+anchors:
+  - id: ar2012_basic
+    kind: human_distribution
+    source: >-
+      Arad & Rubinstein (2012), "The 11-20 Money Request Game: A Level-k
+      Reasoning Study", AER 102(7):3561-3573. Basic version, n=108.
+    description: >-
+      Share of human subjects requesting each amount in the basic game. Mode 17
+      (level-2); 74% of choices in 17-19 (levels 1-3); only 6% at the level-0
+      anchor 20.
+    data: {11: 0.04, 12: 0.00, 13: 0.03, 14: 0.06, 15: 0.01, 16: 0.06, 17: 0.32, 18: 0.30, 19: 0.12, 20: 0.06}
+  - id: ar2012_cycle
+    kind: human_distribution
+    source: Arad & Rubinstein (2012), cycle version, n=72.
+    description: >-
+      Adding the wrap-around bonus (20 beats 11) moves the human mode from 17
+      to 19 and doubles the share at 20 — less reasoning depth conditional on
+      using level-k, not more level-k usage.
+    data: {11: 0.01, 12: 0.01, 13: 0.00, 14: 0.01, 15: 0.00, 16: 0.04, 17: 0.10, 18: 0.22, 19: 0.47, 20: 0.13}
+  - id: ar2012_costless
+    kind: human_distribution
+    source: Arad & Rubinstein (2012), costless-iterations version, n=53.
+    description: >-
+      Making further undercutting monetarily costless does NOT push humans past
+      ~3 reasoning steps: 84% still choose 17-20, mode 19.
+    data: {11: 0.00, 12: 0.04, 13: 0.00, 14: 0.04, 15: 0.04, 16: 0.04, 17: 0.09, 18: 0.21, 19: 0.40, 20: 0.15}
+
+hypotheses:
+  h1_human_anchor:
+    statement: >-
+      In the basic game with the neutral goal framing, the simulated choice
+      distribution concentrates in the human level-1-to-3 region (17-19)
+      rather than collapsing onto the level-0/1 anchor (19-20).
+    rationale: >-
+      Arad & Rubinstein (2012) basic version: 74% of human choices in 17-19,
+      mode 17 (32%). The level-0/1 anchor (19-20) is the shallow-reasoning
+      alternative this hypothesis tests the simulation against.
+    signal_variables: []
+  h2_cycle_shift:
+    statement: >-
+      Adding the cyclic bonus (20 also wins against 11) shifts the simulated
+      choice distribution upward, mirroring the documented human shift.
+    rationale: >-
+      A&R cycle version (n=72): the human distribution shifts toward the
+      level-0 anchor without increasing level-k usage — enhancing the anchor
+      lowers conditional reasoning depth.
+    signal_variables: [game_variant]
+  h3_costless_depth_bound:
+    statement: >-
+      Removing the cost of undercutting does not deepen simulated reasoning
+      beyond roughly three steps.
+    rationale: >-
+      A&R costless-iterations version (n=53): humans stay at 17-20 (84%)
+      despite undercutting being free; the 3-step bound reflects beliefs and
+      cognitive limits, not marginal cost.
+    signal_variables: [game_variant]
+  h4_strategic_framing:
+    statement: >-
+      Adding an explicit opponent-modeling cue shifts choices downward (more
+      best-response iterations).
+    rationale: >-
+      Level-k account of the game: each extra reasoning step lowers the chosen
+      number by one. A cue that the opponent reasons strategically should
+      increase simulated reasoning depth.
+    signal_variables: [goal_framing]
+  h5_model_scale:
+    statement: >-
+      Apparent reasoning depth is non-decreasing in model scale within the
+      Qwen family, and the direction of the cycle shift (h2) is preserved for
+      all four models.
+    rationale: >-
+      Larger models show deeper iterated reasoning on strategic benchmarks
+      (GTBench); a faithful variant effect should not flip sign across scale.
+    signal_variables: [model]
+  h6_persona_disposition:
+    statement: >-
+      Player disposition shifts the chosen number: a cautious disposition
+      raises it (toward the secure level-0 anchor) and a competitive
+      disposition lowers it (deeper undercutting), relative to the neutral
+      baseline.
+    rationale: >-
+      Level-k account of the game: disposition shapes how far a player iterates
+      best responses. A risk-averse player favours the guaranteed amount; an
+      undercut-seeking player iterates further down.
+    signal_variables: [persona]
+
+variables:
+  game_variant:
+    role: signal
+    path: game_variant
+    base: basic
+    values: [basic, cycle, costless]
+  goal_framing:
+    role: signal
+    path: agents.persona_pipeline.defaults.params.goal
+    base: null
+    values:
+      - value: null
+        label: none
+      - value: >-
+          The other player is a strategic reasoner who is also trying to
+          anticipate your choice. Think about how many steps ahead they are
+          likely to reason, and pick the number that maximises your expected
+          payoff.
+        label: strategic
+  model:
+    role: signal
+    kind: model
+    base: qwen3.5-27b-fp8
+    values: [qwen3.5-27b-fp8, qwen3.5-9b, qwen3.5-4b, gemma-4-31b]
+  persona:
+    # Game-playing disposition (both players receive the same persona),
+    # injected into the persona context ahead of the observations. Each
+    # disposition varies motivation and risk attitude. Distinct from
+    # goal_framing, which is the explicit depth-of-reasoning cue.
+    role: signal
+    path: bc_persona_disposition
+    base: ''
+    values:
+      - value: ''
+        label: neutral
+      - value: >-
+          You go with your immediate instinct rather than trying to model how
+          the other player reasons.
+        label: intuitive
+      - value: >-
+          You prefer locking in a high guaranteed amount over gambling on
+          undercutting the other player.
+        label: cautious
+      - value: >-
+          You are focused on winning the bonus by choosing just below what you
+          expect the other player to pick.
+        label: competitive
+  instruction_wording:
+    role: design_variation
+    path: game_rules_text
+    base: null
+    values:
+      - value: null
+        label: default
+      - value: |-
+          === 11-20 MONEY GAME ===
+          Both you and your opponent privately request an amount of points between 11 and 20.
+          Each of you is paid the amount you request.
+          In addition, a player collects a 20-point bonus when their request is exactly one point lower than the other player's request.
+          Neither player learns the other's request until both have chosen.
+        label: paraphrase-a
+      - value: |-
+          === 11-20 MONEY GAME ===
+          In this game you and one other participant each name a whole number of points, no lower than 11 and no higher than 20.
+          Whatever number you name, you get.
+          On top of that, naming a number that is exactly one below the number the other participant names earns you an extra 20 points.
+          Both of you decide at the same time, in private.
+        label: paraphrase-b
+      - value: |-
+          === 11-20 MONEY GAME ===
+          You and the other player each request a whole number of points from 20 down to 11.
+          You receive the amount you request.
+          BONUS: you receive an additional 20 points if you request exactly one less than the other player.
+          Choices are made simultaneously; neither player sees the other's choice in advance.
+        label: descending-range
+      - value: |-
+          === 11-20 MONEY GAME ===
+          You and the other player each request a whole number of points from eleven to twenty.
+          You receive the amount you request.
+          BONUS: you receive an additional twenty points if you request exactly one less than the other player.
+          Choices are made simultaneously; neither player sees the other's choice in advance.
+        label: numbers-as-words
+  response_format:
+    role: design_variation
+    path: env.gm.components.action_prompt.params.action_prompt
+    base: "You are playing the 11-20 Money Game against one other player.\nRules are shown above.\nState your choice on a single line in this exact format:\n  CHOOSE_NUMBER: <N>\nwhere <N> is a whole number between 11 and 20.\nThink about what number maximises your expected payoff.\n"
+    values:
+      - value: "You are playing the 11-20 Money Game against one other player.\nRules are shown above.\nState your choice on a single line in this exact format:\n  CHOOSE_NUMBER: <N>\nwhere <N> is a whole number between 11 and 20.\nThink about what number maximises your expected payoff.\n"
+        label: choose-number-tag
+      - value: "You are playing the 11-20 Money Game against one other player.\nRules are shown above.\nReply with just your chosen number (a whole number between 11 and 20) on its own line.\nThink about what number maximises your expected payoff.\n"
+        label: bare-number
+  temperature:
+    role: design_variation
+    path: sim.llm.temperature
+    base: 0.5
+    values: [0.5, 1.0]
+  persona_format:
+    # Presentation manipulation: the same persona content rendered plain /
+    # descriptive / tabular. Whether this surface format matters is for
+    # participants to test. Held at the neutral persona.
+    role: design_variation
+    kind: group
+    group: agents
+    base: default
+    values:
+      - value: default
+        label: plain
+      - value: persona_descriptive
+        label: descriptive
+      - value: persona_tabular
+        label: tabular
+
+sweep:
+  signal_grid: [game_variant, goal_framing, model, persona]
+  variations:
+    # All representation variations are isolated at the neutral persona so they
+    # probe the variation alone, not a persona x variation interaction.
+    instruction_wording:
+      # The alternative wordings restate the BASIC rules, so they are only
+      # meaning-preserving within the basic variant.
+      cross: subset
+      subset:
+        - {game_variant: basic, model: qwen3.5-27b-fp8, persona: neutral}
+      seeds: 5
+    response_format:
+      cross: subset
+      subset:
+        - {model: qwen3.5-27b-fp8, persona: neutral}
+      seeds: 5
+    temperature:
+      # Crossed over the variant axis at every model.
+      cross: subset
+      subset:
+        - {goal_framing: null, persona: neutral}
+      seeds: 5
+    persona_format:
+      cross: subset
+      subset:
+        - {model: qwen3.5-27b-fp8, persona: neutral}
+      seeds: 5
+  seeds: {start: 3001, count: 5}
+  operating_point: {}
+  world: default
+  timeout_seconds: 900
+  estimates:
+    llm_calls_per_run: 2
+    minutes_per_run: null

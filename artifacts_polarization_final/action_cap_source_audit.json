@@ -1,0 +1,41 @@
+{
+  "checks": {
+    "readme_declares_up_to_three_tool_calls": true,
+    "sim_open_ended_max_actions_three": true,
+    "sim_multi_tool_calling": true,
+    "runtime_prompt_allows_batched_calls": true,
+    "resolver_executes_every_call_in_batch": true,
+    "turn_policy_counts_batch_after_agent_step": true
+  },
+  "interpretation": "The open-ended cap is checked after a batched response is resolved. A single batch may therefore execute more than the advertised three calls before the loop terminates.",
+  "files": [
+    {
+      "path": "references/socsim26_sharedtask/studies/polarization/README.md",
+      "sha256": "22f062cd0743258cd20752a2e44083cc8b2caff9498beb93274ecd5a33c48d2f"
+    },
+    {
+      "path": "references/socsim26_sharedtask/studies/polarization/scenario/sim.yaml",
+      "sha256": "4b6117ec908e0324384d3cc81a218d695825af357fb65c4eb5183d593b06b3ba"
+    },
+    {
+      "path": "references/silisocs_0_2_0/extracted/silisocs/runtime/prompts/action_prompts.py",
+      "sha256": "d37b6e31c12172834fa2940c82c524fdb1c6c7d8d3e72f448fb7ac9ac03417f2"
+    },
+    {
+      "path": "references/silisocs_0_2_0/extracted/silisocs/environments/gm/components/resolve.py",
+      "sha256": "cc2236f2c2b6980d304c7e4a7446f64918d40c6b3f0d6be0e84764321553ae38"
+    },
+    {
+      "path": "references/silisocs_0_2_0/extracted/silisocs/simulation_engines/policies/turns.py",
+      "sha256": "aa411a8a44d060ee7cebeeac125a38a0cd5ffdf49cfa68609c6550155bfde4de"
+    },
+    {
+      "path": "references/silisocs_0_2_0/silisocs-0.2.0-py3-none-any.whl",
+      "sha256": "8ad76033a969edb6731bb14d9a64619ef7df64d234f96179ae05347d74e4f1f9"
+    }
+  ],
+  "generated_overshoot_turns": 23335,
+  "generated_calls_above_cap": 60642,
+  "executed_overshoot_turns": 23327,
+  "executed_events_above_cap": 60634
+}

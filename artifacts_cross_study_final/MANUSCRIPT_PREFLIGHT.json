@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "checks": {
+    "unicode_dash_absent_main": true,
+    "self_coined_acronym_absent_main": true,
+    "abstract_single_block": true,
+    "raw_paths_absent_main": true,
+    "run_total_matches_interface_table": true,
+    "free_text_divergence_total_matches": true
+  },
+  "findings": []
+}

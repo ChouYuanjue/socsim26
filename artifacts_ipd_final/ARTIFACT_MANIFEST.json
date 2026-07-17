@@ -1,0 +1,134 @@
+{
+  "generated_by": "analysis/ipd_cira_analysis.py",
+  "inputs": [
+    {
+      "path": "references/socsim26_sharedtask/socsim26_data/iterated_pd_sweep.tar.gz",
+      "bytes": 37475842,
+      "sha256": "8a5590c95b8ace0f4d6552fa9885d0ac7dbbc918a485cb1667d91da779f69365"
+    },
+    {
+      "path": "references/socsim26_sharedtask/socsim26_data/iterated_pd/sweeps/manifest.csv",
+      "bytes": 3446759,
+      "sha256": "d9d51bc54136583c05761853d69cea023b77614a2816b473c6626658a6cba335"
+    },
+    {
+      "path": "references/socsim26_sharedtask/task_components/game.py",
+      "bytes": 25057,
+      "sha256": "88eebe98a6c4b07ae0f2f160d892322ba848c6976537d652ec1cfe0329ed30d3"
+    }
+  ],
+  "metadata": {
+    "bootstrap_replicates": 4000,
+    "seed": 20260717,
+    "runs": 3465,
+    "action_calls": 69300,
+    "divergent_action_fields": 58
+  },
+  "files": [
+    {
+      "path": "action_projection.csv",
+      "bytes": 57932014,
+      "sha256": "82c7947befe6355f79b84d4911138c96c5cd245d5d904068de404c26c6000c69"
+    },
+    {
+      "path": "claim_execution_sensitivity.csv",
+      "bytes": 9001,
+      "sha256": "4a8124adf20c04bdaff33964872961992ea20d8ebf06ced2eabcaaa2ad7692f2"
+    },
+    {
+      "path": "data_integrity.json",
+      "bytes": 455,
+      "sha256": "631cede995f7b92a967516af8e42aea85c28f71e86fb3bc4041fea039cafcd67"
+    },
+    {
+      "path": "design_identifiability.csv",
+      "bytes": 10579,
+      "sha256": "c02636d30742e53d4bc9d7c7bd36f0066b941243d9edea7b459447cfa537a81f"
+    },
+    {
+      "path": "divergent_actions.csv",
+      "bytes": 71874,
+      "sha256": "c7d35e4dd6e3cfe351afd570dd10c08451341174996e769130663f75be37a3c8"
+    },
+    {
+      "path": "execution_fidelity_by_model.csv",
+      "bytes": 180,
+      "sha256": "0e9c2498443aa1014aed96424871a9b743abdf83b46c3541dd5d8d14263e43ea"
+    },
+    {
+      "path": "execution_fidelity_by_round.csv",
+      "bytes": 250,
+      "sha256": "ed675a09783721284e3b17fb3a9579d12a425a9dd5d4dd5eedf7e925a4228e8b"
+    },
+    {
+      "path": "execution_fidelity_by_signal_context.csv",
+      "bytes": 24286,
+      "sha256": "7184e1697757a5aac568694bb4917679f25f5dc0028ea4fb39570b91caa4d535"
+    },
+    {
+      "path": "explicit_parameter_design_identifiability.csv",
+      "bytes": 10579,
+      "sha256": "c02636d30742e53d4bc9d7c7bd36f0066b941243d9edea7b459447cfa537a81f"
+    },
+    {
+      "path": "explicit_parameter_hypothesis_audit.csv",
+      "bytes": 4550,
+      "sha256": "13121c67f07687017c8d3d2ae9543dd441ccab699da6cf1197c48f47c954ebfe"
+    },
+    {
+      "path": "explicit_parameter_hypothesis_effect_rows.csv",
+      "bytes": 7042700,
+      "sha256": "0736f157fadcd0ca496d7bf11453758d80fd92fabc54550a89070e7de6d6f9de"
+    },
+    {
+      "path": "explicit_parameter_matched_design_effects.csv",
+      "bytes": 18930,
+      "sha256": "b02011d9a32dd70c41fbe81d6f72c30f8f9212b2883eb9ebcb0b14e846c16686"
+    },
+    {
+      "path": "framing_effect_by_model.csv",
+      "bytes": 1900,
+      "sha256": "c7245f667cfac0e9a084f3ff9d4b3f31617471ec2db10d7fe1d811ec91f766df"
+    },
+    {
+      "path": "hypothesis_audit.csv",
+      "bytes": 4504,
+      "sha256": "a05b87dead16c78dda2faa7fe1e251a278eb117918ca658dfe025646154e36d7"
+    },
+    {
+      "path": "hypothesis_effect_rows.csv",
+      "bytes": 7042651,
+      "sha256": "c7a78cab383af29b898a84eb695ade50913d34bcd3e1f334e4d0d9008da3f739"
+    },
+    {
+      "path": "matched_design_effects.csv",
+      "bytes": 18921,
+      "sha256": "6b4af35e438a613a7f2998a095f350dfc16017bd5544a596f76aa31219e8e255"
+    },
+    {
+      "path": "model_cooperation_summary.csv",
+      "bytes": 340,
+      "sha256": "58d738f7c5fd4cbb48410ad0876e355896bb6c227f1c9bdb159ac56f61907ef0"
+    },
+    {
+      "path": "parser_source_audit.json",
+      "bytes": 1681,
+      "sha256": "648a2308d20b975bf8deb5164bf980c76e51c6df5445387c677e5485663bea74"
+    },
+    {
+      "path": "run_level.csv",
+      "bytes": 2437273,
+      "sha256": "6f2d5a5cecc5477764efe861ddf15f27016c4a78e4a6712a27408d2fc529a8ae"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 25379,
+      "sha256": "07442b0b0d9f43c86b567191b3f167819928ca4c14a5b689c9c289593f9d98e1"
+    },
+    {
+      "path": "synthetic_parser_checks.csv",
+      "bytes": 612,
+      "sha256": "9da0eaef5919ff47441381dbe1e09cfe0bd6d520b5d7bdd5607c09f5a9461a75"
+    }
+  ]
+}

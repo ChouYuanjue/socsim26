@@ -1,0 +1,12 @@
+{
+  "source_path": "references/socsim26_sharedtask/task_components/norms.py",
+  "sha256": "af9c178887df8e33120925ce7af7e075636d6cc65b1d0bea22d63d10e702c9a9",
+  "function": "parse_integer_answer",
+  "start_line": 110,
+  "end_line": 120,
+  "source": "def parse_integer_answer(text: str, lo: int | None = None, hi: int | None = None) -> int | None:\n    \"\"\"Extract the first in-range integer from agent free text; None on failure.\n\n    Mirrors silisocs NumericRatingProbe.parse_answer: returns the first integer\n    in [lo, hi], so a preamble like \"on a scale of 1 to 10 I'd say 7\" parses as 7.\n    \"\"\"\n    for m in re.finditer(r\"\\b(\\d+)\\b\", str(text or \"\")):\n        val = int(m.group(1))\n        if (lo is None or val >= lo) and (hi is None or val <= hi):\n            return val\n    return None",
+  "execution_mode": "exact AST definition compiled with standard-library re",
+  "probe_calls": 36720,
+  "released_parser_replay_accuracy": 1.0,
+  "strict_integer_fidelity": 1.0
+}

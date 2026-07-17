@@ -1,0 +1,11 @@
+{
+  "claim_id": "H5c",
+  "official_parent": "h5_model_scale",
+  "short_label": "cycle direction preserved for every model",
+  "models": 4,
+  "minimum_model_point_effect": 0.675,
+  "minimum_model_ci_low": -2.0,
+  "all_model_point_directions_positive": true,
+  "all_model_intervals_positive": false,
+  "target_verdict": "point_direction_holds_but_uncertain"
+}

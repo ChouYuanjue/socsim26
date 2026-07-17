@@ -1,0 +1,240 @@
+study: polarization
+title: Echo-chamber formation across exposure rule, topology, memory, and topic
+question: >-
+  What drives network-level opinion polarisation in the simulation — the feed
+  exposure rule, the network topology, or the agents' memory architecture —
+  does it generalise across discussion topics, and do those effects survive
+  seemingly-unimportant changes in how the same scenario is worded and the
+  same personas are rendered?
+track: shared
+
+anchors:
+  - id: echochambersim
+    kind: literature
+    source: >-
+      Wang, Liu, Yang & Chen (COLING 2025, arXiv:2409.19338), "Decoding Echo
+      Chambers: LLM-Powered Simulations Revealing Polarization in Social
+      Networks".
+    description: >-
+      Reference findings this study generalises: scale-free and small-world
+      networks form echo chambers (locally aligned opinions) while random
+      graphs resist; belief-similarity-based recommendation amplifies local
+      clustering and dissimilarity-based recommendation suppresses it; dual
+      short/long-term memory enforces opinion consistency; credulous personas
+      shift opinion more than skeptical ones. The three discussion topics
+      (euthanasia, AI in decision-making, lifespan extension) are this
+      paper's topics.
+  - id: chuang_truthbias
+    kind: literature
+    source: >-
+      Chuang et al. (NAACL 2024 Findings, arXiv:2311.09618), "Simulating
+      Opinion Dynamics with Networks of LLM-based Agents" — memory design
+      changes opinion volatility; LLM agents drift toward consensus absent
+      countervailing structure.
+
+hypotheses:
+  h1_exposure_rule:
+    statement: >-
+      Stance-similar feed curation increases opinion clustering relative to
+      chronological exposure on the same graph.
+    rationale: >-
+      EchoChamberSim: similarity-based recommendation (authors within belief
+      distance of the reader) amplifies local opinion clustering; the
+      stance-similar feed implements that mechanism over follower edges.
+    signal_variables: [exposure_rule]
+  h2_topology:
+    statement: >-
+      Under follower-constrained feeds, scale-free and small-world graphs
+      develop echo chambers while a degree-matched random graph resists. The
+      pure-recsys arms ignore the follower graph entirely and serve as this
+      hypothesis's null control.
+    rationale: >-
+      EchoChamberSim's central topology result: hubs and clustering amplify
+      local reinforcement; random mixing dissipates it. A feed that never
+      consults the graph should show no topology effect.
+    signal_variables: [graph_file]
+  h3_memory_architecture:
+    statement: >-
+      Persistent memory enforces opinion consistency: removing interaction
+      memory destabilises expressed opinions, and different memory
+      architectures anchor opinions to different degrees.
+    rationale: >-
+      EchoChamberSim: memory is the mechanism of opinion consistency and
+      minority-opinion survival; Chuang et al.: memory design changes
+      opinion-trajectory volatility.
+    signal_variables: [memory_architecture]
+  h4_credulity:
+    statement: >-
+      Credulous personas (trusting of repeated peer content) shift opinion more
+      than skeptical personas under identical exposure.
+    rationale: >-
+      EchoChamberSim personality result: credulous agents' mean belief change
+      1.09 vs 0.83 for skeptical agents.
+    signal_variables: []
+  h5_model_scale:
+    statement: >-
+      The direction of the exposure-rule effect (h1) persists across model
+      scale and family, while its magnitude may vary.
+    rationale: >-
+      Cross-model robustness axis: Gu et al. (arXiv:2502.18138) found
+      model-dependent polarization outcomes (one model polarizes where another
+      converges), so direction stability is a real question, not a formality.
+    signal_variables: [model, exposure_rule]
+  h6_opposite_exposure:
+    statement: >-
+      Opposite-stance exposure reduces opinion clustering relative to
+      stance-similar curation on the same graph.
+    rationale: >-
+      EchoChamberSim's dissimilarity-based recommendation arm: feeding agents
+      distant beliefs suppresses echo-chamber formation.
+    signal_variables: [exposure_rule]
+  h7_topic_generality:
+    statement: >-
+      The exposure-rule effect (h1) holds across the three discussion topics;
+      the topics differ in content, not in the mechanism under test.
+    rationale: >-
+      EchoChamberSim reports its mechanism findings on multiple topics
+      (euthanasia, AI in decision-making, lifespan extension); a
+      simulation that lives by the mechanism should not be topic-bound.
+    signal_variables: [topic, exposure_rule]
+
+variables:
+  exposure_rule:
+    role: signal
+    path: polar_feed_rule
+    base: passthrough
+    values:
+      - value: passthrough
+        label: chrono
+      - value: stance_similar
+        label: stance-sim
+      - value: stance_opposite
+        label: stance-opp
+      - value: recsys_ranked
+        label: recsys
+        overrides:
+          polar_timeline_mode: pure_recsys
+      - value: recsys_reversed
+        label: recsys-rev
+        overrides:
+          polar_timeline_mode: pure_recsys
+  graph_file:
+    role: signal
+    path: polar_graph_path
+    base: ${oc.env:SOCSIM_REPO_ROOT}/studies/polarization/scenario/assets/graphs/scale_free_n32.json
+    values:
+      - value: ${oc.env:SOCSIM_REPO_ROOT}/studies/polarization/scenario/assets/graphs/scale_free_n32.json
+        label: scale-free
+      - value: ${oc.env:SOCSIM_REPO_ROOT}/studies/polarization/scenario/assets/graphs/small_world_n32.json
+        label: small-world
+      - value: ${oc.env:SOCSIM_REPO_ROOT}/studies/polarization/scenario/assets/graphs/random_n32.json
+        label: random
+  memory_architecture:
+    role: signal
+    kind: group
+    group: agents
+    base: default
+    values:
+      - value: default
+        label: window
+      - value: memory_none
+        label: none
+      - value: memory_summary
+        label: summary
+  model:
+    role: signal
+    kind: model
+    base: qwen3.5-27b-fp8
+    values: [qwen3.5-27b-fp8, qwen3.5-9b, qwen3.5-4b, gemma-4-31b]
+  topic:
+    role: signal
+    kind: group
+    group: world
+    base: default
+    values:
+      - value: default
+        label: euthanasia
+      - value: topic_ai
+        label: ai-decisions
+      - value: topic_lifespan
+        label: lifespan
+  topic_paraphrase:
+    role: design_variation
+    kind: group
+    group: world
+    base: default
+    values:
+      - value: default
+        label: original
+      - value: topic_paraphrase
+        label: reworded
+  persona_content:
+    role: design_variation
+    path: polar_persona_path
+    base: ${oc.env:SOCSIM_REPO_ROOT}/studies/polarization/scenario/assets/personas/default.json
+    values:
+      - value: ${oc.env:SOCSIM_REPO_ROOT}/studies/polarization/scenario/assets/personas/default.json
+        label: default
+      - value: ${oc.env:SOCSIM_REPO_ROOT}/studies/polarization/scenario/assets/personas/paraphrase.json
+        label: paraphrase
+      - value: ${oc.env:SOCSIM_REPO_ROOT}/studies/polarization/scenario/assets/personas/narrative.json
+        label: narrative-stance
+      - value: ${oc.env:SOCSIM_REPO_ROOT}/studies/polarization/scenario/assets/personas/order_b.json
+        label: order-b
+  prompt_paraphrase:
+    role: design_variation
+    path: env.gm.components.action_prompt.params.action_prompt
+    base: "You are taking part in an ongoing public debate on the platform.\nRead your timeline and decide what to do this turn: post, reply, like, or repost.\nWrite naturally in your own voice and react to what you actually see.\nWhen you are done with this turn, use FINISHED.\n"
+    values:
+      - value: "You are taking part in an ongoing public debate on the platform.\nRead your timeline and decide what to do this turn: post, reply, like, or repost.\nWrite naturally in your own voice and react to what you actually see.\nWhen you are done with this turn, use FINISHED.\n"
+        label: default
+      - value: "You are one of the participants in a running public debate on the platform.\nLook at your timeline and choose your actions for this turn — posting, replying, liking, or reposting.\nRespond to what is actually in front of you, in your own natural voice.\nUse FINISHED when your turn is complete.\n"
+        label: reworded
+
+sweep:
+  signal_grid: [exposure_rule, graph_file]
+  variations:
+    memory_architecture:
+      # h3 tested on the base topology under the two follower-constrained
+      # exposure rules most relevant to clustering.
+      cross: subset
+      subset:
+        - {exposure_rule: chrono, graph_file: scale-free}
+        - {exposure_rule: stance-sim, graph_file: scale-free}
+    model:
+      # h5: direction of the exposure effect across models, base topology.
+      cross: subset
+      subset:
+        - {exposure_rule: chrono, graph_file: scale-free}
+        - {exposure_rule: stance-sim, graph_file: scale-free}
+        - {exposure_rule: recsys, graph_file: scale-free}
+    topic:
+      # h7: topic generality of the exposure effect, base topology.
+      cross: subset
+      subset:
+        - {exposure_rule: chrono, graph_file: scale-free}
+        - {exposure_rule: stance-sim, graph_file: scale-free}
+        - {exposure_rule: recsys, graph_file: scale-free}
+    topic_paraphrase:
+      cross: subset
+      subset:
+        - {exposure_rule: chrono, graph_file: scale-free}
+        - {exposure_rule: stance-sim, graph_file: scale-free}
+    persona_content:
+      cross: subset
+      subset:
+        - {exposure_rule: chrono, graph_file: scale-free}
+        - {exposure_rule: stance-sim, graph_file: scale-free}
+    prompt_paraphrase:
+      cross: subset
+      subset:
+        - {exposure_rule: chrono, graph_file: scale-free}
+        - {exposure_rule: stance-sim, graph_file: scale-free}
+  seeds: {start: 4001, count: 5}
+  operating_point:
+    sim.llm.temperature: 0.7
+  world: default
+  timeout_seconds: 14400
+  estimates:
+    llm_calls_per_run: 1000
+    minutes_per_run: null

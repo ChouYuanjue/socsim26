@@ -1,0 +1,187 @@
+study: persona_expression
+title: Where agent-population diversity comes from (and whether it survives)
+question: >-
+  When a population of LLM agents posts into a feed, how much genuine response
+  diversity appears, where does it come from — prompt wording, persona
+  grounding, or model — and when the observation pathway is opened, does
+  interaction amplify that diversity or collapse it toward consensus?
+track: shared
+
+anchors:
+  - id: nemotron_scope_personas
+    kind: script
+    source: >-
+      NVIDIA Nemotron-Personas-USA (CC BY 4.0); Salesforce SCOPE
+      (arXiv:2601.07110, 2026, CC BY-NC 4.0). Joined by uuid.
+    description: >-
+      Persona grounding. Nemotron supplies census-grounded demographics plus
+      free-text bios; SCOPE adds sociopsychological facets joinable on the same
+      individual by uuid. Together they give a within-individual richness ladder
+      (generic -> demographic -> full-bio -> sociopsychological). SCOPE reports
+      demographic-only personas as a structural bottleneck for reproducing human
+      response variation, which the richness ladder is built to stress-test.
+    fetch:
+      script: studies/persona_expression/get_personas.py
+      note: >-
+        Both datasets are downloaded from Hugging Face (gitignored under
+        studies/persona_expression/data/). get_personas.py joins them on uuid and
+        draws a census-representative sample; tools/gen_persona_expression_rosters.py
+        writes the committed rosters.
+  - id: llm_homogenization
+    kind: literature
+    source: >-
+      Hu & Collier (ACL 2024); Kirk et al. (ICLR 2024); Jiang et al.
+      ("Artificial Hivemind", NeurIPS 2025); Bisbee et al. (Political Analysis 2024).
+    description: >-
+      Persona conditioning explains little output variance, and alignment/scale
+      suppress diversity while shared base models correlate outputs across agents;
+      silicon samples recover the human mean but collapse its variance. Motivates
+      treating persona richness, prompt, and model as competing diversity sources
+      rather than assuming richer grounding yields more diversity.
+  - id: barrie_tornberg
+    kind: literature
+    source: "Barrie & Törnberg (2025, arXiv:2505.23796)."
+    description: >-
+      In the closed pathway, cross-agent observation is mechanically impossible
+      (task_components/observe.py::NullObservationComponent) — the audit trail in
+      prompts_and_responses.jsonl proves agents saw no peer content, so any
+      diversity there is priors plus prompt, not interaction. This is the
+      non-interactive baseline the open arm is read against.
+
+hypotheses:
+  h1_persona_bottleneck:
+    statement: >-
+      Richer persona grounding raises inter-agent diversity, but with diminishing
+      and unreliable returns — moving from generic to demographic-only personas
+      moves apparent diversity far less than the added content would suggest.
+    rationale: >-
+      Stress-tests the demographic-bottleneck finding (SCOPE; Hu & Collier) inside
+      a live multi-agent simulation, on identical individuals across richness rungs.
+    signal_variables: [persona_richness]
+  h2_prompt_rivals_grounding:
+    statement: >-
+      Changing one sentence of the action prompt shifts inter-agent diversity by an
+      amount comparable to changing persona richness or the model — wording rivals
+      grounding and architecture as a source of apparent behavioural variety.
+    rationale: >-
+      The gameability test: an evaluation that credits diversity to agent
+      sophistication should notice that a one-sentence prompt edit moves the number
+      as much as a richer persona or a bigger model.
+    signal_variables: [action_prompt, persona_richness, model]
+  h3_model_monoculture:
+    statement: >-
+      Inter-agent diversity does not increase with model scale within the Qwen
+      family (and the sign is stable across families) — homogenization is a model
+      property that capability does not remove.
+    rationale: >-
+      Alignment and scale are documented to suppress output diversity (Kirk et al.;
+      Artificial Hivemind); tests whether a bigger model yields a more homogeneous
+      population at fixed persona and prompt.
+    signal_variables: [model]
+  h4_interaction_effect:
+    statement: >-
+      Opening the observation+update pathway changes inter-agent diversity relative
+      to the mechanically-closed floor; whether it amplifies differentiation or
+      collapses the population toward consensus is genuinely open.
+    rationale: >-
+      The closed arm guarantees the baseline is non-interactive (Barrie & Törnberg);
+      the open arm tests whether real interaction adds or destroys variety. Failure
+      to change anything is itself informative.
+    signal_variables: [interaction_pathway, persona_richness]
+  h5_artifact_stability:
+    statement: >-
+      The persona-richness and action-prompt diversity orderings are stable under
+      persona paraphrase, persona reordering, and reseeding — the effects are
+      systematic, not wording noise.
+    rationale: >-
+      An ordering that vanished under trivial rewording or reordering would be an
+      artifact; the findings are only useful if they reproduce.
+    signal_variables: [persona_richness, action_prompt]
+
+variables:
+  persona_richness:
+    role: signal
+    # Selects which roster field becomes the agent context (pe_context_field is
+    # consumed by agents/default.yaml field_map). A value variable, NOT an agents
+    # group, so it can sit in the grid alongside the agents-roster variations
+    # without a same-group conflict. base == world default (full-bio rung).
+    path: pe_context_field
+    base: context_full_bio
+    values:
+      - value: context_generic
+        label: generic
+        # generic strips identity too: neutral User-NN name/handle.
+        overrides:
+          pe_name_field: name_generic
+          pe_username_field: username_generic
+      - {value: context_demographic, label: demographic}
+      - {value: context_full_bio, label: full-bio}
+      - {value: context_sociopsych, label: sociopsychological}
+  action_prompt:
+    role: signal
+    path: env.gm.components.action_prompt.params.action_prompt
+    base: "Think about what you genuinely want to say right now, then write a post that says it.\nWrite in your own voice.\n"
+    values:
+      - value: "Think about what you genuinely want to say right now, then write a post that says it.\nWrite in your own voice.\n"
+        label: deliberate
+      - value: "Post your immediate gut reaction — whatever comes to mind first, without overthinking it.\n"
+        label: reactive
+      - value: "Write the post most likely to get strong engagement — likes, replies, reposts. Optimize for attention.\n"
+        label: engagement-max
+  interaction_pathway:
+    role: signal
+    kind: group
+    group: world
+    base: default
+    values:
+      - {value: default, label: closed}
+      - {value: interactive, label: open}
+  model:
+    role: signal
+    kind: model
+    base: qwen3.5-27b-fp8
+    values: [qwen3.5-27b-fp8, qwen3.5-9b, qwen3.5-4b, gemma-4-31b]
+  persona_paraphrase:
+    role: design_variation
+    # Swaps the whole roster file (pe_roster_path) for a paraphrased one. Shares
+    # the pe_roster_path key with persona_order (different key from richness's
+    # pe_context_field, so no conflict with the grid); only one is ever off-base.
+    path: pe_roster_path
+    base: "${oc.env:SOCSIM_REPO_ROOT}/studies/persona_expression/scenario/assets/personas/roster.json"
+    values:
+      - {value: "${oc.env:SOCSIM_REPO_ROOT}/studies/persona_expression/scenario/assets/personas/roster.json", label: original}
+      - {value: "${oc.env:SOCSIM_REPO_ROOT}/studies/persona_expression/scenario/assets/personas/roster_paraphrase.json", label: reworded}
+  persona_order:
+    role: design_variation
+    path: pe_roster_path
+    base: "${oc.env:SOCSIM_REPO_ROOT}/studies/persona_expression/scenario/assets/personas/roster.json"
+    values:
+      - {value: "${oc.env:SOCSIM_REPO_ROOT}/studies/persona_expression/scenario/assets/personas/roster.json", label: original}
+      - {value: "${oc.env:SOCSIM_REPO_ROOT}/studies/persona_expression/scenario/assets/personas/roster_order_b.json", label: reversed}
+
+sweep:
+  signal_grid: [persona_richness, action_prompt, model]
+  variations:
+    interaction_pathway:
+      # The open arm is the cost driver; cross it with the full richness x prompt
+      # plane at the primary model only (h4 is a primary-model finding).
+      cross: subset
+      subset:
+        - {model: qwen3.5-27b-fp8}
+    persona_paraphrase:
+      # Pin richness to its base (the full-bio rung) so only one agents-group
+      # variable is ever off-base in a condition (avoids a same-group conflict).
+      cross: subset
+      subset:
+        - {model: qwen3.5-27b-fp8, persona_richness: full-bio}
+    persona_order:
+      cross: subset
+      subset:
+        - {model: qwen3.5-27b-fp8, persona_richness: full-bio}
+  seeds: {start: 7001, count: 8}
+  operating_point: {}
+  world: default
+  timeout_seconds: 3600
+  estimates:
+    llm_calls_per_run: null
+    minutes_per_run: null

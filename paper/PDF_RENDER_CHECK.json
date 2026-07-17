@@ -1,0 +1,112 @@
+{
+  "paper/main_final.pdf": {
+    "bytes": 186349,
+    "sha256": "76943DB59CF1937BF33E85733CAABCB4D04BF1C90CDCD6A00603AA2F07F1F8DD",
+    "pages": 2,
+    "renders": [
+      {
+        "page": 1,
+        "png": "paper\\_render_check_final\\main_final_page_1.png",
+        "width": 918,
+        "height": 1188,
+        "text_chars": 6671,
+        "blankish": false
+      },
+      {
+        "page": 2,
+        "png": "paper\\_render_check_final\\main_final_page_2.png",
+        "width": 918,
+        "height": 1188,
+        "text_chars": 2239,
+        "blankish": false
+      }
+    ]
+  },
+  "paper/supplement_final.pdf": {
+    "bytes": 182418,
+    "sha256": "5B36F318B2F89FD131AED5851147549CFB12005754136782520CE121EEC8127A",
+    "pages": 10,
+    "renders": [
+      {
+        "page": 1,
+        "png": "paper\\_render_check_final\\supplement_final_page_1.png",
+        "width": 918,
+        "height": 1188,
+        "text_chars": 2129,
+        "blankish": false
+      },
+      {
+        "page": 2,
+        "png": "paper\\_render_check_final\\supplement_final_page_2.png",
+        "width": 1188,
+        "height": 918,
+        "text_chars": 816,
+        "blankish": false
+      },
+      {
+        "page": 3,
+        "png": "paper\\_render_check_final\\supplement_final_page_3.png",
+        "width": 918,
+        "height": 1188,
+        "text_chars": 666,
+        "blankish": false
+      },
+      {
+        "page": 4,
+        "png": "paper\\_render_check_final\\supplement_final_page_4.png",
+        "width": 1188,
+        "height": 918,
+        "text_chars": 2655,
+        "blankish": false
+      },
+      {
+        "page": 5,
+        "png": "paper\\_render_check_final\\supplement_final_page_5.png",
+        "width": 1188,
+        "height": 918,
+        "text_chars": 934,
+        "blankish": false
+      },
+      {
+        "page": 6,
+        "png": "paper\\_render_check_final\\supplement_final_page_6.png",
+        "width": 918,
+        "height": 1188,
+        "text_chars": 452,
+        "blankish": false
+      },
+      {
+        "page": 7,
+        "png": "paper\\_render_check_final\\supplement_final_page_7.png",
+        "width": 1188,
+        "height": 918,
+        "text_chars": 889,
+        "blankish": false
+      },
+      {
+        "page": 8,
+        "png": "paper\\_render_check_final\\supplement_final_page_8.png",
+        "width": 918,
+        "height": 1188,
+        "text_chars": 340,
+        "blankish": false
+      },
+      {
+        "page": 9,
+        "png": "paper\\_render_check_final\\supplement_final_page_9.png",
+        "width": 1188,
+        "height": 918,
+        "text_chars": 1252,
+        "blankish": false
+      },
+      {
+        "page": 10,
+        "png": "paper\\_render_check_final\\supplement_final_page_10.png",
+        "width": 918,
+        "height": 1188,
+        "text_chars": 3951,
+        "blankish": false
+      }
+    ]
+  }
+}

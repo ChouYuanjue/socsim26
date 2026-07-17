@@ -1,0 +1,5 @@
+{
+  "public_package_policy": "Includes final paper, supplement, analysis scripts, generated result tables, and lightweight official/pinned source files needed for parser/runtime source audits. Excludes official raw sweep tarballs and extracted run logs.",
+  "suggested_repository_name": "socsim26-claim-execution-audit",
+  "raw_data_excluded": true
+}

@@ -1,0 +1,5 @@
+model,choice,declared_choice,first_valid_choice_token,agent_actions
+gemma-4-31b,20,19,20,150
+gemma-4-31b,11,20,11,30
+gemma-4-31b,20,11,20,30
+gemma-4-31b,20,15,20,20

@@ -1,0 +1,18 @@
+{
+  "manifest_rows": 220,
+  "parsed_runs": 220,
+  "tool_call_decisions": 190784,
+  "generated_overshoot_turns": 23335,
+  "generated_calls_above_cap": 60642,
+  "executed_overshoot_turns": 23327,
+  "executed_events_above_cap": 60634,
+  "strict_probe_fidelity_nonmissing": 1.0,
+  "missing_probe_outputs": 3,
+  "incomplete_probe_runs": 2,
+  "exact_action_sequence_runs": 204,
+  "unexecuted_generated_calls": 20,
+  "unexpected_event_calls": 0,
+  "errors": [],
+  "manifest_sha256": "0b11c3df2a161d870e78112e2874baf62361e34991c2fa963573f461ff8647fa",
+  "tarball_sha256": "b506d9e84d765fd1e66bb0d19c01a1ef572e52b85c085616508c5c2b7d5d96e2"
+}

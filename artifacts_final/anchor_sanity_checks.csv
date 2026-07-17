@@ -1,0 +1,4 @@
+check,value,expected_under_no_signal,passes,interpretation
+identical_distribution_old_switched_anchor_range,0.03716339588874562,0.0,True,Nonzero demonstrates that changing the target anchor alone creates an apparent game-variant range.
+identical_distribution_direct_variant_contrast,0.0,0.0,True,CIRA's direct cycle-minus-basic choice contrast is exactly zero when behavior is copied across variants.
+identical_distribution_own_anchor_identification_accuracy,0.3333333333333333,0.3333333333333333,True,One unchanged distribution can be nearest to only one of three anchors; switching labels cannot yield perfect identification.

@@ -1,0 +1,82 @@
+claim_id,official_parent,design_variable,design_level,identifiable,n_strata,n_seed_effects,reason
+P1a,h1_instruction_framing,persona_format,descriptive,True,12,60,matched claim arms exist under the non-default design level
+P1a,h1_instruction_framing,persona_format,tabular,True,12,60,matched claim arms exist under the non-default design level
+P1a,h1_instruction_framing,prompt_wording,paraphrase-a,True,9,45,matched claim arms exist under the non-default design level
+P1a,h1_instruction_framing,prompt_wording,paraphrase-b,True,9,45,matched claim arms exist under the non-default design level
+P1a,h1_instruction_framing,prompt_wording,defect-first,True,9,45,matched claim arms exist under the non-default design level
+P1a,h1_instruction_framing,choice_labels,green-blue,True,9,45,matched claim arms exist under the non-default design level
+P1a,h1_instruction_framing,choice_labels,action-ab,True,9,45,matched claim arms exist under the non-default design level
+P1a,h1_instruction_framing,history_format,table,True,9,45,matched claim arms exist under the non-default design level
+P1a,h1_instruction_framing,history_format,summary_counts,True,9,45,matched claim arms exist under the non-default design level
+P1b,h1_instruction_framing,persona_format,descriptive,True,12,60,matched claim arms exist under the non-default design level
+P1b,h1_instruction_framing,persona_format,tabular,True,12,60,matched claim arms exist under the non-default design level
+P1b,h1_instruction_framing,prompt_wording,paraphrase-a,True,9,45,matched claim arms exist under the non-default design level
+P1b,h1_instruction_framing,prompt_wording,paraphrase-b,True,9,45,matched claim arms exist under the non-default design level
+P1b,h1_instruction_framing,prompt_wording,defect-first,True,9,45,matched claim arms exist under the non-default design level
+P1b,h1_instruction_framing,choice_labels,green-blue,True,9,45,matched claim arms exist under the non-default design level
+P1b,h1_instruction_framing,choice_labels,action-ab,True,9,45,matched claim arms exist under the non-default design level
+P1b,h1_instruction_framing,history_format,table,True,9,45,matched claim arms exist under the non-default design level
+P1b,h1_instruction_framing,history_format,summary_counts,True,9,45,matched claim arms exist under the non-default design level
+P2a,h2_payoff_stakes,persona_format,descriptive,True,9,45,matched claim arms exist under the non-default design level
+P2a,h2_payoff_stakes,persona_format,tabular,True,9,45,matched claim arms exist under the non-default design level
+P2a,h2_payoff_stakes,prompt_wording,paraphrase-a,True,9,45,matched claim arms exist under the non-default design level
+P2a,h2_payoff_stakes,prompt_wording,paraphrase-b,True,9,45,matched claim arms exist under the non-default design level
+P2a,h2_payoff_stakes,prompt_wording,defect-first,True,9,45,matched claim arms exist under the non-default design level
+P2a,h2_payoff_stakes,choice_labels,green-blue,True,9,45,matched claim arms exist under the non-default design level
+P2a,h2_payoff_stakes,choice_labels,action-ab,True,9,45,matched claim arms exist under the non-default design level
+P2a,h2_payoff_stakes,history_format,table,True,9,45,matched claim arms exist under the non-default design level
+P2a,h2_payoff_stakes,history_format,summary_counts,True,9,45,matched claim arms exist under the non-default design level
+P2b,h2_payoff_stakes,persona_format,descriptive,True,9,45,matched claim arms exist under the non-default design level
+P2b,h2_payoff_stakes,persona_format,tabular,True,9,45,matched claim arms exist under the non-default design level
+P2b,h2_payoff_stakes,prompt_wording,paraphrase-a,True,9,45,matched claim arms exist under the non-default design level
+P2b,h2_payoff_stakes,prompt_wording,paraphrase-b,True,9,45,matched claim arms exist under the non-default design level
+P2b,h2_payoff_stakes,prompt_wording,defect-first,True,9,45,matched claim arms exist under the non-default design level
+P2b,h2_payoff_stakes,choice_labels,green-blue,True,9,45,matched claim arms exist under the non-default design level
+P2b,h2_payoff_stakes,choice_labels,action-ab,True,9,45,matched claim arms exist under the non-default design level
+P2b,h2_payoff_stakes,history_format,table,True,9,45,matched claim arms exist under the non-default design level
+P2b,h2_payoff_stakes,history_format,summary_counts,True,9,45,matched claim arms exist under the non-default design level
+P3,h3_fictional_frame,persona_format,descriptive,True,9,45,matched claim arms exist under the non-default design level
+P3,h3_fictional_frame,persona_format,tabular,True,9,45,matched claim arms exist under the non-default design level
+P3,h3_fictional_frame,prompt_wording,paraphrase-a,True,9,45,matched claim arms exist under the non-default design level
+P3,h3_fictional_frame,prompt_wording,paraphrase-b,True,9,45,matched claim arms exist under the non-default design level
+P3,h3_fictional_frame,prompt_wording,defect-first,True,9,45,matched claim arms exist under the non-default design level
+P3,h3_fictional_frame,choice_labels,green-blue,True,9,45,matched claim arms exist under the non-default design level
+P3,h3_fictional_frame,choice_labels,action-ab,True,9,45,matched claim arms exist under the non-default design level
+P3,h3_fictional_frame,history_format,table,True,9,45,matched claim arms exist under the non-default design level
+P3,h3_fictional_frame,history_format,summary_counts,True,9,45,matched claim arms exist under the non-default design level
+P5,h5_endgame_defection,persona_format,descriptive,True,36,180,matched claim arms exist under the non-default design level
+P5,h5_endgame_defection,persona_format,tabular,True,36,180,matched claim arms exist under the non-default design level
+P5,h5_endgame_defection,prompt_wording,paraphrase-a,True,27,135,matched claim arms exist under the non-default design level
+P5,h5_endgame_defection,prompt_wording,paraphrase-b,True,27,135,matched claim arms exist under the non-default design level
+P5,h5_endgame_defection,prompt_wording,defect-first,True,27,135,matched claim arms exist under the non-default design level
+P5,h5_endgame_defection,choice_labels,green-blue,True,27,135,matched claim arms exist under the non-default design level
+P5,h5_endgame_defection,choice_labels,action-ab,True,27,135,matched claim arms exist under the non-default design level
+P5,h5_endgame_defection,history_format,table,True,27,135,matched claim arms exist under the non-default design level
+P5,h5_endgame_defection,history_format,summary_counts,True,27,135,matched claim arms exist under the non-default design level
+P6a,h6_persona_stance,persona_format,descriptive,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6a,h6_persona_stance,persona_format,tabular,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6a,h6_persona_stance,prompt_wording,paraphrase-a,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6a,h6_persona_stance,prompt_wording,paraphrase-b,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6a,h6_persona_stance,prompt_wording,defect-first,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6a,h6_persona_stance,choice_labels,green-blue,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6a,h6_persona_stance,choice_labels,action-ab,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6a,h6_persona_stance,history_format,table,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6a,h6_persona_stance,history_format,summary_counts,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6b,h6_persona_stance,persona_format,descriptive,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6b,h6_persona_stance,persona_format,tabular,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6b,h6_persona_stance,prompt_wording,paraphrase-a,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6b,h6_persona_stance,prompt_wording,paraphrase-b,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6b,h6_persona_stance,prompt_wording,defect-first,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6b,h6_persona_stance,choice_labels,green-blue,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6b,h6_persona_stance,choice_labels,action-ab,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6b,h6_persona_stance,history_format,table,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6b,h6_persona_stance,history_format,summary_counts,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6c,h6_persona_stance,persona_format,descriptive,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6c,h6_persona_stance,persona_format,tabular,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6c,h6_persona_stance,prompt_wording,paraphrase-a,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6c,h6_persona_stance,prompt_wording,paraphrase-b,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6c,h6_persona_stance,prompt_wording,defect-first,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6c,h6_persona_stance,choice_labels,green-blue,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6c,h6_persona_stance,choice_labels,action-ab,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6c,h6_persona_stance,history_format,table,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"
+P6c,h6_persona_stance,history_format,summary_counts,False,0,0,"one or both claim arms are absent at this design level, or no matched context exists"

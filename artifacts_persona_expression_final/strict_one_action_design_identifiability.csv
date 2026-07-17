@@ -1,0 +1,11 @@
+claim_id,design_variable,design_level,identifiable,reason
+E1a,persona_paraphrase,reworded,False,required claim arms are not both present under this design level
+E1a,persona_order,reversed,False,required claim arms are not both present under this design level
+E1b,persona_paraphrase,reworded,False,required claim arms are not both present under this design level
+E1b,persona_order,reversed,False,required claim arms are not both present under this design level
+E1c,persona_paraphrase,reworded,False,required claim arms are not both present under this design level
+E1c,persona_order,reversed,False,required claim arms are not both present under this design level
+E3a,persona_paraphrase,reworded,False,required claim arms are not both present under this design level
+E3a,persona_order,reversed,False,required claim arms are not both present under this design level
+E3b,persona_paraphrase,reworded,False,required claim arms are not both present under this design level
+E3b,persona_order,reversed,False,required claim arms are not both present under this design level
