@@ -1,8 +1,8 @@
 # COLM 2026 Many Worlds Shared Task — Public Artifact
 
-This artifact contains an anonymized, public-only submission package for the COLM 2026 Many Worlds Shared Task on Evaluating LLM Social Simulations.
+This artifact contains a public submission package for the COLM 2026 Many Worlds Shared Task on Evaluating LLM Social Simulations.
 
-Suggested anonymized repository name: `socsim26-claim-execution-audit`.
+Repository note: the current GitHub repository is permanent but not anonymous because it is hosted under a personal account. For blind review, mirror these contents to an anonymous repository or use an organizer-approved supplementary upload location.
 
 ## Paper
 
@@ -45,7 +45,7 @@ The package does not redistribute official raw sweep tarballs. Download them fro
 
 World Values Survey anchors for Observed Norms are not included because the official task notes that WVS redistribution is license-restricted. Human-anchor fidelity claims for that study are therefore marked unavailable unless the evaluator obtains WVS data independently.
 
-No permanent repository URL is included in this package. The scientific checks pass, but the official submission remains `NOT_SUBMISSION_READY` until an anonymized permanent code/result repository or organizer-approved supplementary upload location is configured.
+A permanent GitHub repository is now configured. The remaining blind-review logistics issue is anonymity: this personal-account repository should be mirrored to an anonymous location if the submission requires anonymous supplementary material.
 
 ## GitHub-size note
 
@@ -56,3 +56,5 @@ The repository omits three regenerable high-granularity CSV intermediates that e
 - `artifacts_polarization_final/decision_level.csv`
 
 All paper-facing tables, validation JSON files, the claim evidence ledger, the main PDF, and the supplement PDF remain included.
+
+For the full directory and file-to-result map, see `README.md`.

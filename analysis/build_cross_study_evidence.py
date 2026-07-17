@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import csv
 import hashlib
 import json
@@ -74,7 +75,7 @@ def add(rows: list[dict[str, str]], claim_id: str, location: str, description: s
     })
 
 
-def main() -> None:
+def main(skip_source_integrity: bool = False, validation_output: Path | None = None) -> None:
     tex = PAPER.read_text(encoding="utf-8")
     summary = json.loads((ROOT / "artifacts_cross_study_final" / "summary.json").read_text(encoding="utf-8"))
     interfaces = pd.read_csv(ROOT / "artifacts_cross_study_final" / "execution_interface_audit.csv")
@@ -149,19 +150,29 @@ def main() -> None:
     for study, expected in TARBALLS.items():
         tar = data_root / f"{study}_sweep.tar.gz"
         manifest = data_root / study / "sweeps" / "manifest.csv"
-        source_integrity[study] = {
-            "tarball_exists": tar.exists(),
-            "tarball_sha256": sha256(tar) if tar.exists() else None,
-            "tarball_sha256_expected": expected,
-            "tarball_ok": tar.exists() and sha256(tar) == expected,
-            "manifest_exists": manifest.exists(),
-            "manifest_sha256": sha256(manifest) if manifest.exists() else None,
-            "manifest_sha256_expected": MANIFESTS[study],
-            "manifest_ok": manifest.exists() and sha256(manifest) == MANIFESTS[study],
-        }
+        if skip_source_integrity:
+            source_integrity[study] = {
+                "mode": "skipped",
+                "reason": "official raw sweep tarballs are intentionally not redistributed in the public repository",
+                "tarball_sha256_expected": expected,
+                "manifest_sha256_expected": MANIFESTS[study],
+            }
+        else:
+            source_integrity[study] = {
+                "mode": "checked",
+                "tarball_exists": tar.exists(),
+                "tarball_sha256": sha256(tar) if tar.exists() else None,
+                "tarball_sha256_expected": expected,
+                "tarball_ok": tar.exists() and sha256(tar) == expected,
+                "manifest_exists": manifest.exists(),
+                "manifest_sha256": sha256(manifest) if manifest.exists() else None,
+                "manifest_sha256_expected": MANIFESTS[study],
+                "manifest_ok": manifest.exists() and sha256(manifest) == MANIFESTS[study],
+            }
 
     status = "PASS"
-    if pages != 2 or missing_tokens or missing_phrases or not all(v["tarball_ok"] and v["manifest_ok"] for v in source_integrity.values()):
+    source_ok = skip_source_integrity or all(v["tarball_ok"] and v["manifest_ok"] for v in source_integrity.values())
+    if pages != 2 or missing_tokens or missing_phrases or not source_ok:
         status = "FAIL"
 
     with LEDGER.open("w", encoding="utf-8-sig", newline="") as handle:
@@ -182,11 +193,26 @@ def main() -> None:
         "cross_study_totals": totals,
         "scope": summary["scope"],
     }
-    VALIDATION.write_text(json.dumps(validation, indent=2, ensure_ascii=False), encoding="utf-8")
+    output_path = validation_output or VALIDATION
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(validation, indent=2, ensure_ascii=False), encoding="utf-8")
     print(json.dumps(validation, indent=2, ensure_ascii=False))
     if status != "PASS":
         raise SystemExit("cross-study evidence validation failed")
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Validate main-paper numbers against checked-in result tables.")
+    parser.add_argument(
+        "--skip-source-integrity",
+        action="store_true",
+        help="Skip official raw tarball/manifest checks. Use this for a clean public GitHub clone before downloading the official data.",
+    )
+    parser.add_argument(
+        "--validation-output",
+        type=Path,
+        default=None,
+        help="Optional path for the validation JSON. Defaults to artifacts_cross_study_final/PAPER_NUMBER_VALIDATION.json.",
+    )
+    args = parser.parse_args()
+    main(skip_source_integrity=args.skip_source_integrity, validation_output=args.validation_output)

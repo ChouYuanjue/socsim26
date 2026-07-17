@@ -4,7 +4,7 @@
 
 `PASS` for scientific/reproducibility checks.
 
-`NOT_SUBMISSION_READY` for official submission logistics until a permanent anonymized repository URL or organizer-approved supplementary upload is configured.
+`CODE_REPOSITORY_READY` for public code/result availability. For blind review, mirror this repository to an anonymous location or use an organizer-approved supplementary upload, because the current GitHub repository is under a personal account.
 
 ## Paper
 
@@ -39,6 +39,6 @@
 - [x] No permanent personal identity details intentionally included in the public package.
 - [x] Secret scan run before final links.
 
-## Remaining official-submission blocker
+## Remaining official-submission note
 
-A permanent anonymized code/result location is still required. Temporary MCP download links are useful for handoff but should not be used as the final paper/reviewer link.
+The repository has been pushed to GitHub. The only remaining logistics issue is anonymity: if the venue requires blind supplementary material, mirror the same contents to an anonymous repository or organizer-approved upload location before placing the link in the submission.

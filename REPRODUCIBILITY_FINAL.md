@@ -51,8 +51,10 @@ When the artifact CSV/JSON files are already generated, this faster gate validat
 ```bash
 python -m unittest -v test_cross_study_audits.py
 python analysis/build_cross_study_summary.py
-python analysis/build_cross_study_evidence.py
+python analysis/build_cross_study_evidence.py --skip-source-integrity --validation-output artifacts_cross_study_final/PAPER_NUMBER_VALIDATION_LOCAL.json
 ```
+
+This checks the paper numbers against the checked-in result tables without requiring raw data. Full source-integrity validation is performed by `python analysis/reproduce_final.py` after the official tarballs are downloaded.
 
 Current validation result:
 
